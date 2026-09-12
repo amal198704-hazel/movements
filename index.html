@@ -1,0 +1,1321 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Mobile Web App</title>
+
+    <!-- Material Symbols / Icons -->
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f7f3f9;
+            color: #333;
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        /* App Header with Rainbow Gradient Accent */
+        header {
+            background: #ffffff;
+            padding: 16px 20px;
+            font-size: 1.2rem;
+            font-weight: 700;
+            text-align: center;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            border-bottom: 3px solid transparent;
+            border-image: linear-gradient(90deg, #ff416c, #ff4b2b, #f9d423, #00b09b, #9b51e0) 1;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        /* Main Content Area */
+        main {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            padding-bottom: 90px;
+        }
+
+        /* Tab Switcher Navigation Bar */
+        .tab-bar {
+            display: flex;
+            background: #ffffff;
+            padding: 6px;
+            border-radius: 50px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 10px rgba(155, 81, 224, 0.08);
+            gap: 6px;
+        }
+
+        .tab-btn {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            padding: 9px 8px;
+            border: none;
+            border-radius: 40px;
+            background: transparent;
+            color: #777;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .tab-btn .material-symbols-outlined {
+            font-size: 17px;
+        }
+
+        .tab-btn.active {
+            background: linear-gradient(90deg, #ff416c, #9b51e0);
+            color: #ffffff;
+            box-shadow: 0 3px 10px rgba(155, 81, 224, 0.3);
+        }
+
+        .tab-badge {
+            background: rgba(0, 0, 0, 0.07);
+            color: inherit;
+            font-size: 0.7rem;
+            padding: 2px 7px;
+            border-radius: 12px;
+        }
+
+        .tab-btn.active .tab-badge {
+            background: rgba(255, 255, 255, 0.25);
+            color: #ffffff;
+        }
+
+        /* Card Container */
+        #cardsContainer {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        /* Task Card Styling */
+        .task-card {
+            background: #ffffff;
+            border-radius: 16px;
+            padding: 16px;
+            box-shadow: 0 4px 15px rgba(155, 81, 224, 0.08);
+            border: 1px solid rgba(255, 65, 108, 0.12);
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .task-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid #f3eef7;
+            padding-bottom: 8px;
+        }
+
+        .file-badge {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: #9b51e0;
+        }
+
+        .ward-tag {
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 3px 9px;
+            border-radius: 20px;
+            background: linear-gradient(90deg, rgba(255, 65, 108, 0.12), rgba(155, 81, 224, 0.12));
+            color: #ff416c;
+        }
+
+        .task-title {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #222;
+        }
+
+        .task-detail {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.88rem;
+            color: #555;
+        }
+
+        .task-detail .material-symbols-outlined {
+            font-size: 18px;
+            color: #9b51e0;
+        }
+
+        .task-call-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            text-decoration: none;
+            color: #00b09b;
+            font-weight: 600;
+        }
+
+        .route-box {
+            background-color: #faf7fc;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            color: #666;
+            line-height: 1.4;
+        }
+
+        .inspection-box {
+            background-color: #f0fdf4;
+            border: 1px solid #bbf7d0;
+            padding: 8px 12px;
+            border-radius: 10px;
+            font-size: 0.83rem;
+            color: #166534;
+        }
+
+        .task-footer {
+            display: flex;
+            justify-content: flex-start;
+            align-items: center;
+            font-size: 0.8rem;
+            color: #8e8e93;
+            border-top: 1px dashed #ede5f2;
+            padding-top: 8px;
+            margin-top: 2px;
+            gap: 16px;
+        }
+
+        .task-actions {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-action {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            border: none;
+            border-radius: 20px;
+            padding: 6px 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.1s ease, opacity 0.2s ease;
+        }
+
+        .btn-action:active {
+            transform: scale(0.95);
+        }
+
+        .btn-action .material-symbols-outlined {
+            font-size: 15px;
+        }
+
+        .btn-edit {
+            background-color: #f3eef7;
+            color: #9b51e0;
+        }
+
+        .btn-start {
+            background: linear-gradient(90deg, #00b09b, #96c93d);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(0, 176, 155, 0.25);
+        }
+
+        .btn-sendback {
+            background-color: #fee2e2;
+            color: #ef4444;
+        }
+
+        .btn-inspect {
+            background: linear-gradient(90deg, #0284c7, #38bdf8);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(2, 132, 199, 0.25);
+        }
+
+        .btn-complete-final {
+            background: linear-gradient(90deg, #10b981, #059669);
+            color: #ffffff;
+            box-shadow: 0 2px 8px rgba(16, 185, 129, 0.3);
+        }
+
+        .badge-date {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .badge-date .material-symbols-outlined {
+            font-size: 16px;
+        }
+
+        /* Bottom Navigation Bar */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 65px;
+            background: #ffffff;
+            display: flex;
+            justify-content: space-around;
+            align-items: center;
+            box-shadow: 0 -2px 15px rgba(0, 0, 0, 0.06);
+            z-index: 50;
+            padding-bottom: env(safe-area-inset-bottom);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: none;
+            border: none;
+            color: #8e8e93;
+            font-size: 0.75rem;
+            flex: 1;
+            cursor: pointer;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: #e024c3;
+        }
+
+        /* Floating Center Plus Button */
+        .nav-plus-wrapper {
+            position: relative;
+            flex: 1;
+            display: flex;
+            justify-content: center;
+        }
+
+        .plus-btn {
+            position: absolute;
+            top: -30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #ff416c, #f9d423, #9b51e0);
+            background-size: 200% 200%;
+            animation: gradientShift 4s ease infinite;
+            color: #ffffff;
+            border: 4px solid #f7f3f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 6px 16px rgba(224, 36, 195, 0.35);
+            cursor: pointer;
+            transition: transform 0.15s ease;
+        }
+
+        .plus-btn:active {
+            transform: scale(0.92);
+        }
+
+        .plus-btn .material-symbols-outlined {
+            font-size: 32px;
+        }
+
+        /* Modals Generic Setup */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(45, 20, 60, 0.5);
+            backdrop-filter: blur(4px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            z-index: 100;
+            padding: 16px;
+        }
+
+        .modal-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #ffffff;
+            width: 100%;
+            max-width: 480px;
+            max-height: 85vh;
+            overflow-y: auto;
+            border-radius: 24px;
+            padding: 24px 20px;
+            transform: scale(0.95);
+            transition: transform 0.25s ease;
+            box-shadow: 0 10px 30px rgba(155, 81, 224, 0.2);
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .modal-content::-webkit-scrollbar {
+            display: none;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .modal-header h3 {
+            font-size: 1.25rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #ff416c, #9b51e0);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .close-btn {
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: #aaa;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover {
+            color: #ff416c;
+        }
+
+        .form-group {
+            margin-bottom: 16px;
+        }
+
+        .form-row {
+            display: flex;
+            gap: 10px;
+            width: 100%;
+        }
+
+        .form-row input,
+        .form-row select {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 11px 16px;
+            border: 1px solid #f0e6f5;
+            background-color: #faf7fc;
+            margin-bottom: 10px;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .form-group select {
+            border-radius: 20px;
+            color: #444;
+        }
+
+        .form-group textarea {
+            border-radius: 18px;
+            resize: none;
+        }
+
+        /* Animated Pride Spectrum Glow on Focus */
+        @keyframes rainbowGlow {
+            0% {
+                box-shadow: 0 0 0 2px #ff416c, 0 0 12px rgba(255, 65, 108, 0.6);
+            }
+
+            25% {
+                box-shadow: 0 0 0 2px #ff8a00, 0 0 12px rgba(255, 138, 0, 0.6);
+            }
+
+            50% {
+                box-shadow: 0 0 0 2px #00b09b, 0 0 12px rgba(0, 176, 155, 0.6);
+            }
+
+            75% {
+                box-shadow: 0 0 0 2px #9b51e0, 0 0 12px rgba(155, 81, 224, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 0 0 2px #ff416c, 0 0 12px rgba(255, 65, 108, 0.6);
+            }
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            background-color: #ffffff;
+            animation: rainbowGlow 2.5s linear infinite;
+        }
+
+        @keyframes gradientShift {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 13px;
+            background: linear-gradient(90deg, #ff416c, #ff8a00, #9b51e0);
+            background-size: 200% auto;
+            color: white;
+            border: none;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(255, 65, 108, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            transition: transform 0.15s ease, filter 0.2s ease, opacity 0.2s ease;
+        }
+
+        .submit-btn:active {
+            transform: scale(0.97);
+            filter: brightness(0.95);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .modal-btn-row {
+            display: flex;
+            gap: 12px;
+            margin-top: 10px;
+        }
+
+        .btn-cancel {
+            flex: 1;
+            padding: 12px;
+            border-radius: 50px;
+            border: 1px solid #ddd;
+            background: #ffffff;
+            color: #666;
+            font-size: 0.95rem;
+            font-weight: 600;
+            cursor: pointer;
+        }
+
+        .btn-confirm-complete {
+            flex: 2;
+            padding: 12px;
+            border-radius: 50px;
+            border: none;
+            background: linear-gradient(90deg, #0284c7, #38bdf8);
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(2, 132, 199, 0.3);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .upload-section {
+            background: #faf7fc;
+            border: 1px dashed #d8b4e2;
+            border-radius: 16px;
+            padding: 12px;
+            margin-bottom: 12px;
+        }
+
+        .upload-section label {
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #7e22ce;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 6px;
+        }
+
+        .gps-btn {
+            width: 100%;
+            padding: 10px;
+            border-radius: 50px;
+            background: #e0f2fe;
+            color: #0369a1;
+            border: 1px solid #bae6fd;
+            font-weight: 600;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            cursor: pointer;
+            margin-bottom: 8px;
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 18px;
+            height: 18px;
+            border: 2px solid rgba(255, 255, 255, 0.4);
+            border-radius: 50%;
+            border-top-color: #ffffff;
+            animation: spin 0.8s linear infinite;
+        }
+
+        .loading .spinner {
+            display: inline-block;
+        }
+
+        @keyframes spin {
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        #cardsLoader {
+            text-align: center;
+            color: #64748b;
+            padding: 30px 10px;
+            font-size: 0.95rem;
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>My Mobile App</header>
+
+    <main>
+        <!-- Tab Bar -->
+        <div class="tab-bar">
+            <button class="tab-btn active" data-tab="in-office" onclick="switchTab('in-office')">
+                <span class="material-symbols-outlined">desk</span>
+                <span>In Office</span>
+                <span class="tab-badge" id="badge-in-office">0</span>
+            </button>
+            <button class="tab-btn" data-tab="on-field" onclick="switchTab('on-field')">
+                <span class="material-symbols-outlined">directions_walk</span>
+                <span>On Field</span>
+                <span class="tab-badge" id="badge-on-field">0</span>
+            </button>
+            <button class="tab-btn" data-tab="completed" onclick="switchTab('completed')">
+                <span class="material-symbols-outlined">task_alt</span>
+                <span>Completed</span>
+                <span class="tab-badge" id="badge-completed">0</span>
+            </button>
+        </div>
+
+        <div id="cardsContainer">
+            <div id="cardsLoader">Loading tasks...</div>
+        </div>
+    </main>
+
+    <nav class="bottom-nav">
+        <button class="nav-item active">
+            <span class="material-symbols-outlined">home</span>
+            <span>Home</span>
+        </button>
+
+        <div class="nav-plus-wrapper">
+            <button class="plus-btn" id="openModalBtn" aria-label="Add item">
+                <span class="material-symbols-outlined">add</span>
+            </button>
+        </div>
+
+        <button class="nav-item">
+            <span class="material-symbols-outlined">person</span>
+            <span>Profile</span>
+        </button>
+    </nav>
+
+    <!-- Modal 1: Data Entry Draft Modal (In Office) -->
+    <div class="modal-overlay" id="dataModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add New Record</h3>
+                <button class="close-btn" id="closeModalBtn">&times;</button>
+            </div>
+
+            <form id="todoForm">
+                <div class="form-group">
+                    <div class="form-row">
+                        <input type="text" id="fileNumber" placeholder="File Number" required>
+                        <input type="text" id="ward" placeholder="Ward" required>
+                    </div>
+
+                    <input type="text" id="applicantName" placeholder="Applicant Name" required>
+                    <input type="text" id="houseName" placeholder="House Name" required>
+
+                    <div class="form-row">
+                        <input type="tel" id="mobile" placeholder="Mobile" required>
+                        <input type="text" id="work" placeholder="Type Of Work" required>
+                    </div>
+
+                    <input type="text" id="place" placeholder="Place" required>
+                    <textarea id="route" rows="3" placeholder="Enter route details..."></textarea>
+                </div>
+
+                <button type="submit" id="submitBtn" class="submit-btn">
+                    <span class="btn-text">Save Draft (In Office)</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 2: Start Modal for Out Date & Out Time -->
+    <div class="modal-overlay" id="startModal">
+        <div class="modal-content" style="max-width: 380px;">
+            <div class="modal-header">
+                <h3>Start Field Task</h3>
+                <button class="close-btn" id="closeStartModalBtn">&times;</button>
+            </div>
+
+            <form id="startTaskForm">
+                <input type="hidden" id="activeStartFileNumber">
+
+                <div class="form-group">
+                    <label style="font-size: 0.85rem; color: #666; margin-bottom: 6px; display: block;">Select Out Date
+                        & Time</label>
+                    <div class="form-row">
+                        <input type="date" id="startDueDate" required>
+                        <input type="time" id="startTime" required>
+                    </div>
+                </div>
+
+                <button type="submit" id="startSubmitBtn" class="submit-btn">
+                    <span class="spinner" aria-hidden="true"></span>
+                    <span class="btn-text">Confirm & Upload</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal 3: Inspection Modal (On Field) -->
+    <div class="modal-overlay" id="inspectModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Field Inspection</h3>
+                <button class="close-btn" id="closeInspectModalBtn">&times;</button>
+            </div>
+
+            <form id="inspectForm">
+                <input type="hidden" id="inspectFileNumber">
+
+                <div
+                    style="margin-bottom: 14px; background: #faf7fc; padding: 10px 14px; border-radius: 12px; border-left: 4px solid #9b51e0;">
+                    <div style="font-weight: 700; color: #333;" id="inspectApplicantInfo">Applicant Name</div>
+                    <div style="font-size: 0.8rem; color: #777;" id="inspectFileInfo">File: #000</div>
+                </div>
+
+                <div class="form-group">
+                    <label
+                        style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Eligibility
+                        Status</label>
+                    <select id="inspectEligibility" required>
+                        <option value="Eligible">Eligible</option>
+                        <option value="Ineligible">Ineligible</option>
+                        <option value="Pending / Inquiry">Pending / Inquiry</option>
+                    </select>
+
+                    <label
+                        style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Field
+                        Remarks</label>
+                    <textarea id="inspectRemarks" rows="3" placeholder="Enter remarks, verifications, site condition..."
+                        required></textarea>
+
+                    <label
+                        style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Inspection
+                        Date & Time</label>
+                    <div class="form-row">
+                        <input type="date" id="inspectDate" required>
+                        <input type="time" id="inspectTime" required>
+                    </div>
+
+                    <button type="button" class="gps-btn" id="gpsBtn">
+                        <span class="material-symbols-outlined">my_location</span>
+                        <span id="gpsStatusText">Capture Current GPS</span>
+                    </button>
+
+                    <div class="upload-section">
+                        <label>
+                            <span class="material-symbols-outlined">add_a_photo</span>
+                            Upload Site Photos (Dummy)
+                        </label>
+                        <input type="file" accept="image/*" multiple
+                            style="margin-bottom: 0; font-size: 0.8rem; background: transparent; border: none; padding: 0;">
+                    </div>
+
+                    <div class="upload-section">
+                        <label>
+                            <span class="material-symbols-outlined">picture_as_pdf</span>
+                            Attach Field Report PDF (Dummy)
+                        </label>
+                        <input type="file" accept="application/pdf"
+                            style="margin-bottom: 0; font-size: 0.8rem; background: transparent; border: none; padding: 0;">
+                    </div>
+                </div>
+
+                <div class="modal-btn-row">
+                    <button type="button" class="btn-cancel" id="cancelInspectBtn">Cancel</button>
+                    <button type="submit" class="btn-confirm-complete" id="completeInspectSubmitBtn">
+                        <span class="spinner" aria-hidden="true"></span>
+                        <span class="material-symbols-outlined">send</span>
+                        <span class="btn-text">Submit Inspection</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        const api = "https://script.google.com/macros/s/AKfycbySLnyYj8QHF3-dXiUEW6Oxk9OH788U3oXfDdSmGgiv_PPqupLQykz1XY7HoyVviZ-7/exec";
+
+        // DOM Elements
+        const openModalBtn = document.getElementById('openModalBtn');
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        const dataModal = document.getElementById('dataModal');
+        const form = document.getElementById('todoForm');
+        const cardsContainer = document.getElementById('cardsContainer');
+
+        // Start Modal Elements
+        const startModal = document.getElementById('startModal');
+        const closeStartModalBtn = document.getElementById('closeStartModalBtn');
+        const startTaskForm = document.getElementById('startTaskForm');
+        const startSubmitBtn = document.getElementById('startSubmitBtn');
+        const activeStartFileNumber = document.getElementById('activeStartFileNumber');
+        const startDueDate = document.getElementById('startDueDate');
+        const startTime = document.getElementById('startTime');
+
+        // Inspect Modal Elements
+        const inspectModal = document.getElementById('inspectModal');
+        const closeInspectModalBtn = document.getElementById('closeInspectModalBtn');
+        const cancelInspectBtn = document.getElementById('cancelInspectBtn');
+        const inspectForm = document.getElementById('inspectForm');
+        const inspectFileNumber = document.getElementById('inspectFileNumber');
+        const inspectApplicantInfo = document.getElementById('inspectApplicantInfo');
+        const inspectFileInfo = document.getElementById('inspectFileInfo');
+        const inspectDate = document.getElementById('inspectDate');
+        const inspectTime = document.getElementById('inspectTime');
+        const gpsBtn = document.getElementById('gpsBtn');
+        const gpsStatusText = document.getElementById('gpsStatusText');
+        const completeInspectSubmitBtn = document.getElementById('completeInspectSubmitBtn');
+
+        // State variables
+        let currentTab = 'in-office';
+        let allTasks = [];
+
+        // Storage Helpers
+        const getLocalDrafts = () => JSON.parse(localStorage.getItem('in_office_tasks') || '[]');
+        const saveLocalDrafts = (tasks) => localStorage.setItem('in_office_tasks', JSON.stringify(tasks));
+
+        // Modal Controls
+        openModalBtn.addEventListener('click', () => dataModal.classList.add('active'));
+        closeModalBtn.addEventListener('click', () => dataModal.classList.remove('active'));
+        closeStartModalBtn.addEventListener('click', () => startModal.classList.remove('active'));
+        closeInspectModalBtn.addEventListener('click', () => inspectModal.classList.remove('active'));
+        cancelInspectBtn.addEventListener('click', () => inspectModal.classList.remove('active'));
+
+        window.addEventListener('click', (e) => {
+            if (e.target === dataModal) dataModal.classList.remove('active');
+            if (e.target === startModal) startModal.classList.remove('active');
+            if (e.target === inspectModal) inspectModal.classList.remove('active');
+        });
+
+        // Tab Switching
+        function switchTab(tabName) {
+            currentTab = tabName;
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.tab === tabName);
+            });
+            renderCards();
+        }
+
+        // Update Tab Badges Count
+        function updateBadges(inOfficeCount, onFieldCount, completedCount) {
+            document.getElementById('badge-in-office').textContent = inOfficeCount;
+            document.getElementById('badge-on-field').textContent = onFieldCount;
+            document.getElementById('badge-completed').textContent = completedCount;
+        }
+
+        // 1. Initial Load: Fetch Sheet tasks & merge with local drafts
+        window.addEventListener("DOMContentLoaded", loadAllData);
+
+        function loadAllData() {
+            cardsContainer.innerHTML = '<div id="cardsLoader">Loading tasks...</div>';
+
+            fetch(api)
+                .then(res => {
+                    if (!res.ok) throw new Error("Could not retrieve sheet tasks.");
+                    return res.json();
+                })
+                .then(sheetTasks => {
+                    const drafts = getLocalDrafts().map(t => ({ ...t, status: 'In Office' }));
+                    allTasks = [...drafts, ...(sheetTasks || [])];
+                    renderCards();
+                })
+                .catch(err => {
+                    console.warn("Could not sync with Google Sheets, loading local only:", err);
+                    allTasks = getLocalDrafts().map(t => ({ ...t, status: 'In Office' }));
+                    renderCards();
+                });
+        }
+
+        // 2. Render Cards based on selected tab
+        function renderCards() {
+            cardsContainer.innerHTML = "";
+
+            // Grouping logic:
+            // "In Office" -> local drafts
+            // "On Field"  -> status === "On Field"
+            // "Completed" -> status === "Pending Complete" or status === "Completed"
+            const inOfficeCount = allTasks.filter(t => (t.status || 'In Office').toLowerCase() === 'in office').length;
+            const onFieldCount = allTasks.filter(t => (t.status || '').toLowerCase() === 'on field').length;
+            const completedCount = allTasks.filter(t => {
+                const s = (t.status || '').toLowerCase();
+                return s === 'completed' || s === 'pending complete';
+            }).length;
+
+            updateBadges(inOfficeCount, onFieldCount, completedCount);
+
+            const filtered = allTasks.filter(t => {
+                const s = (t.status || 'In Office').toLowerCase();
+                if (currentTab === 'in-office') return s === 'in office';
+                if (currentTab === 'on-field') return s === 'on field';
+                if (currentTab === 'completed') return s === 'completed' || s === 'pending complete';
+                return false;
+            });
+
+            if (filtered.length === 0) {
+                cardsContainer.innerHTML = `<div id="cardsLoader">No tasks in ${currentTab.replace('-', ' ')}.</div>`;
+                return;
+            }
+
+            filtered.forEach(task => {
+                const card = document.createElement("div");
+                card.className = "task-card";
+
+                const isOffice = (task.status || 'In Office').toLowerCase() === 'in office';
+                const isOnField = (task.status || '').toLowerCase() === 'on field';
+                const isPendingComplete = (task.status || '').toLowerCase() === 'pending complete';
+                const isFullyCompleted = (task.status || '').toLowerCase() === 'completed';
+
+                card.innerHTML = `
+                    <div class="task-header">
+                        <span class="file-badge">#${escapeHtml(task.fileNumber || 'N/A')} - ${escapeHtml(task.work || 'Task')}</span>
+                        <span class="ward-tag">${task.place ? escapeHtml(task.place) + ', ' : ''}Ward: ${escapeHtml(task.ward || '-')}</span>
+                    </div>
+
+                    <div class="task-title">${escapeHtml(task.name || 'Unnamed')} 
+                        <span style="font-weight: 400; font-size: 0.9rem; color: #666;">(${escapeHtml(task.address || '')})</span>
+                    </div>
+
+                    ${task.mobile ? `
+                    <div class="task-detail">
+                        <span class="material-symbols-outlined">call</span>
+                        <a href="tel:${escapeHtml(task.mobile)}" class="task-call-btn">${escapeHtml(task.mobile)}</a>
+                    </div>` : ''}
+
+                    ${task.route ? `
+                    <div class="route-box">
+                        <strong>Route:</strong> ${escapeHtml(task.route)}
+                    </div>` : ''}
+
+                    ${task.eligibility || task.remarks ? `
+                    <div class="inspection-box">
+                        <div><strong>Eligibility:</strong> ${escapeHtml(task.eligibility || '-')}</div>
+                        ${task.remarks ? `<div><strong>Remarks:</strong> ${escapeHtml(task.remarks)}</div>` : ''}
+                        ${task.inspectDate ? `<div style="font-size: 0.75rem; color: #555; margin-top: 3px;">Inspected: ${escapeHtml(task.inspectDate)} ${escapeHtml(task.inspectTime || '')}</div>` : ''}
+                    </div>` : ''}
+
+                    <div class="task-footer">
+                        <div class="badge-date">
+                            <span class="material-symbols-outlined">calendar_today</span>
+                            <span>${escapeHtml(task.outDate || 'Not set')}</span>
+                        </div>
+                        <div class="badge-date">
+                            <span class="material-symbols-outlined">schedule</span>
+                            <span>${escapeHtml(task.outTime || '--:--')}</span>
+                        </div>
+
+                        <div class="task-actions">
+                            ${isOffice ? `
+                                <button class="btn-action btn-edit" onclick="handleEdit('${escapeHtml(task.fileNumber)}')">
+                                    <span class="material-symbols-outlined">edit</span>
+                                    <span>Edit</span>
+                                </button>
+                                <button class="btn-action btn-start" onclick="handleStart('${escapeHtml(task.fileNumber)}')">
+                                    <span class="material-symbols-outlined">play_arrow</span>
+                                    <span>Start</span>
+                                </button>
+                            ` : ''}
+
+                            ${isOnField ? `
+                                <button class="btn-action btn-sendback" onclick="handleSendBack('${escapeHtml(task.fileNumber)}')">
+                                    <span class="material-symbols-outlined">undo</span>
+                                    <span>Send Back</span>
+                                </button>
+                                <button class="btn-action btn-inspect" onclick="handleInspect('${escapeHtml(task.fileNumber)}')">
+                                    <span class="material-symbols-outlined">search_check</span>
+                                    <span>Inspect</span>
+                                </button>
+                            ` : ''}
+
+                            ${isPendingComplete ? `
+                                <button class="btn-action btn-sendback" style="background:#e0f2fe; color:#0284c7;" onclick="handleReturnToField('${escapeHtml(task.fileNumber)}')">
+                                    <span class="material-symbols-outlined">undo</span>
+                                    <span>Return</span>
+                                </button>
+                                <button class="btn-action btn-complete-final" onclick="handleFinalComplete('${escapeHtml(task.fileNumber)}')">
+                                    <span class="material-symbols-outlined">check_circle</span>
+                                    <span>Complete</span>
+                                </button>
+                            ` : ''}
+
+                            ${isFullyCompleted ? `
+                                <span style="font-size: 0.75rem; font-weight: 700; color: #10b981; display: flex; align-items: center; gap: 3px;">
+                                    <span class="material-symbols-outlined" style="font-size: 16px;">verified</span>
+                                    Done: ${escapeHtml(task.completedDate || '')}
+                                </span>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+
+                cardsContainer.appendChild(card);
+            });
+        }
+
+        // 3. Save Draft (In Office)
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const newTask = {
+                fileNumber: document.getElementById("fileNumber").value.trim(),
+                ward: document.getElementById("ward").value.trim(),
+                name: document.getElementById("applicantName").value.trim(),
+                address: document.getElementById("houseName").value.trim(),
+                mobile: document.getElementById("mobile").value.trim(),
+                work: document.getElementById("work").value.trim(),
+                place: document.getElementById("place").value.trim(),
+                route: document.getElementById("route").value.trim(),
+                outDate: "",
+                outTime: "",
+                status: "In Office"
+            };
+
+            const drafts = getLocalDrafts();
+            const idx = drafts.findIndex(t => t.fileNumber === newTask.fileNumber);
+            if (idx > -1) drafts[idx] = newTask;
+            else drafts.push(newTask);
+
+            saveLocalDrafts(drafts);
+            form.reset();
+            dataModal.classList.remove('active');
+
+            switchTab('in-office');
+            loadAllData();
+        });
+
+        // 4. Open Start Modal
+        function handleStart(fileNumber) {
+            activeStartFileNumber.value = fileNumber;
+
+            const now = new Date();
+            startDueDate.value = now.toISOString().split('T')[0];
+            startTime.value = now.toTimeString().slice(0, 5);
+
+            startModal.classList.add('active');
+        }
+
+        // 5. Submit Start: Uploads to Google Sheet -> "On Field"
+        startTaskForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const targetFileNumber = activeStartFileNumber.value;
+            const drafts = getLocalDrafts();
+            const draftIndex = drafts.findIndex(t => t.fileNumber === targetFileNumber);
+
+            if (draftIndex === -1) {
+                alert("Task not found in drafts!");
+                return;
+            }
+
+            const payload = {
+                ...drafts[draftIndex],
+                outDate: startDueDate.value,
+                outTime: startTime.value,
+                status: "On Field"
+            };
+
+            startSubmitBtn.disabled = true;
+            startSubmitBtn.classList.add('loading');
+
+            fetch(api, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify(payload)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        drafts.splice(draftIndex, 1);
+                        saveLocalDrafts(drafts);
+
+                        startModal.classList.remove('active');
+                        startTaskForm.reset();
+
+                        switchTab('on-field');
+                        loadAllData();
+                    } else {
+                        throw new Error(data.message || "Failed to upload task.");
+                    }
+                })
+                .catch(err => {
+                    alert(`Error: ${err.message}`);
+                })
+                .finally(() => {
+                    startSubmitBtn.disabled = false;
+                    startSubmitBtn.classList.remove('loading');
+                });
+        });
+
+        // 6. Send Back: Delete row from Google Sheet & restore to In Office
+        function handleSendBack(fileNumber) {
+            if (!confirm(`Send task #${fileNumber} back to In Office? It will be removed from Google Sheets.`)) return;
+
+            const task = allTasks.find(t => t.fileNumber === fileNumber);
+            if (!task) return;
+
+            fetch(api, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "deleteTask", fileNumber: fileNumber })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        const drafts = getLocalDrafts();
+                        const draftTask = { ...task, status: "In Office", outDate: "", outTime: "" };
+
+                        const idx = drafts.findIndex(t => t.fileNumber === fileNumber);
+                        if (idx > -1) drafts[idx] = draftTask;
+                        else drafts.push(draftTask);
+
+                        saveLocalDrafts(drafts);
+
+                        switchTab('in-office');
+                        loadAllData();
+                    } else {
+                        alert("Failed to send back: " + (data.message || "Server error"));
+                    }
+                })
+                .catch(err => alert("Error: " + err.message));
+        }
+
+        // 7. Open Inspection Modal
+        function handleInspect(fileNumber) {
+            const task = allTasks.find(t => t.fileNumber === fileNumber);
+            if (!task) return;
+
+            inspectFileNumber.value = task.fileNumber;
+            inspectApplicantInfo.textContent = task.name || 'Applicant';
+            inspectFileInfo.textContent = `File: #${task.fileNumber} | ${task.work || ''} | Ward: ${task.ward || ''}`;
+
+            document.getElementById('inspectEligibility').value = 'Eligible';
+            document.getElementById('inspectRemarks').value = '';
+            gpsStatusText.textContent = "Capture Current GPS";
+
+            const now = new Date();
+            inspectDate.value = now.toISOString().split('T')[0];
+            inspectTime.value = now.toTimeString().slice(0, 5);
+
+            inspectModal.classList.add('active');
+        }
+
+        // Dummy GPS Click Handler
+        gpsBtn.addEventListener('click', () => {
+            gpsStatusText.textContent = "Acquiring GPS...";
+            setTimeout(() => {
+                gpsStatusText.textContent = "Lat: 10.8505° N, Lon: 76.2711° E (Captured)";
+                gpsBtn.style.background = "#dcfce7";
+                gpsBtn.style.color = "#15803d";
+                gpsBtn.style.borderColor = "#86efac";
+            }, 800);
+        });
+
+        // 8. Submit Inspection: Moves task to "Completed" Tab (as 'Pending Complete')
+        inspectForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const fileNumber = inspectFileNumber.value;
+            const eligibility = document.getElementById('inspectEligibility').value;
+            const remarks = document.getElementById('inspectRemarks').value.trim();
+            const date = inspectDate.value;
+            const time = inspectTime.value;
+
+            completeInspectSubmitBtn.disabled = true;
+            completeInspectSubmitBtn.classList.add('loading');
+
+            const payload = {
+                action: "submitInspection",
+                fileNumber: fileNumber,
+                status: "Pending Complete",
+                eligibility: eligibility,
+                remarks: remarks,
+                inspectDate: date,
+                inspectTime: time
+            };
+
+            fetch(api, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify(payload)
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        inspectModal.classList.remove('active');
+                        inspectForm.reset();
+
+                        // Switch to Completed tab where task is ready for final signoff
+                        switchTab('completed');
+                        loadAllData();
+                    } else {
+                        alert("Failed to submit inspection: " + (data.message || "Server error"));
+                    }
+                })
+                .catch(err => alert("Error submitting inspection: " + err.message))
+                .finally(() => {
+                    completeInspectSubmitBtn.disabled = false;
+                    completeInspectSubmitBtn.classList.remove('loading');
+                });
+        });
+
+        // 9. Return to Field from Completed Tab
+        function handleReturnToField(fileNumber) {
+            if (!confirm(`Return task #${fileNumber} back to On Field?`)) return;
+
+            fetch(api, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({ action: "updateStatus", fileNumber: fileNumber, status: "On Field" })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        switchTab('on-field');
+                        loadAllData();
+                    } else {
+                        alert("Could not return task: " + data.message);
+                    }
+                })
+                .catch(err => alert("Error: " + err.message));
+        }
+
+        // 10. Final Complete: Capture current date & time, mark status as "Completed"
+        function handleFinalComplete(fileNumber) {
+            if (!confirm(`Mark task #${fileNumber} as officially Completed?`)) return;
+
+            const now = new Date();
+            const completedDate = now.toISOString().split('T')[0];
+            const completedTime = now.toTimeString().slice(0, 5);
+
+            fetch(api, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({
+                    action: "updateStatus",
+                    fileNumber: fileNumber,
+                    status: "Completed",
+                    completedDate: completedDate,
+                    completedTime: completedTime
+                })
+            })
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        loadAllData();
+                    } else {
+                        alert("Could not complete task: " + data.message);
+                    }
+                })
+                .catch(err => alert("Error: " + err.message));
+        }
+
+        // Edit local draft
+        function handleEdit(fileNumber) {
+            const drafts = getLocalDrafts();
+            const task = drafts.find(t => t.fileNumber === fileNumber);
+            if (!task) return;
+
+            document.getElementById("fileNumber").value = task.fileNumber;
+            document.getElementById("ward").value = task.ward;
+            document.getElementById("applicantName").value = task.name;
+            document.getElementById("houseName").value = task.address;
+            document.getElementById("mobile").value = task.mobile;
+            document.getElementById("work").value = task.work;
+            document.getElementById("place").value = task.place;
+            document.getElementById("route").value = task.route;
+
+            dataModal.classList.add('active');
+        }
+
+        function escapeHtml(str) {
+            if (!str) return "";
+            return String(str)
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+
+</html>
