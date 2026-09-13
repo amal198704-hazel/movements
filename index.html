@@ -52,34 +52,138 @@
             overflow: hidden;
         }
 
+        /* Search Bar Header */
         header {
             background: #ffffff;
-            padding: 16px 20px;
-            font-size: 1.2rem;
-            font-weight: 700;
-            text-align: center;
+            padding: 10px 16px;
             position: sticky;
             top: 0;
             z-index: 10;
             border-bottom: 3px solid transparent;
             border-image: linear-gradient(90deg, #ff416c, #ff4b2b, #f9d423, #00b09b, #9b51e0) 1;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
         }
 
+        .search-container {
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+
+        .search-container .search-icon {
+            position: absolute;
+            left: 14px;
+            color: #9b51e0;
+            font-size: 20px;
+            pointer-events: none;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 9px 36px 9px 42px;
+            border: 1.5px solid #ede5f2;
+            background-color: #faf7fc;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: all 0.2s ease;
+        }
+
+        .search-input:focus {
+            background-color: #ffffff;
+            border-color: #9b51e0;
+            box-shadow: 0 0 0 3px rgba(155, 81, 224, 0.15);
+        }
+
+        .search-clear-btn {
+            position: absolute;
+            right: 12px;
+            background: none;
+            border: none;
+            color: #aaa;
+            cursor: pointer;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Filter Controls Bar */
+        .filter-controls-bar {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 14px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .filter-controls-bar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .filter-select {
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            border: 1px solid #e2d9eb;
+            background: #ffffff;
+            color: #555;
+            font-weight: 600;
+            outline: none;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .filter-select:focus {
+            border-color: #9b51e0;
+        }
+
+        .filter-chip-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            font-size: 0.8rem;
+            border-radius: 20px;
+            border: 1px solid #e2d9eb;
+            background: #ffffff;
+            color: #555;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .filter-chip-btn.active {
+            background: #9b51e0;
+            color: #ffffff;
+            border-color: #9b51e0;
+        }
+
+        .filter-chip-btn .material-symbols-outlined {
+            font-size: 16px;
+        }
+
+        /* Main Content Area */
         main {
             flex: 1;
             padding: 16px;
             overflow-y: auto;
             padding-bottom: 125px;
-            /* Ensures clearance over floating bottom nav */
         }
 
+        /* Tab Bar */
         .tab-bar {
             display: flex;
             background: #ffffff;
             padding: 6px;
             border-radius: 50px;
-            margin-bottom: 16px;
+            margin-bottom: 12px;
             box-shadow: 0 2px 10px rgba(155, 81, 224, 0.08);
             gap: 6px;
         }
@@ -130,6 +234,7 @@
             gap: 14px;
         }
 
+        /* Task Card */
         .task-card {
             background: #ffffff;
             border-radius: 16px;
@@ -845,9 +950,20 @@
 
 <body>
 
-    <header>My Mobile App</header>
+    <!-- Header Search Bar -->
+    <header>
+        <div class="search-container">
+            <span class="material-symbols-outlined search-icon">search</span>
+            <input type="text" id="globalSearchInput" class="search-input"
+                placeholder="Search by name, file, ward, place, route...">
+            <button type="button" class="search-clear-btn" id="searchClearBtn">
+                <span class="material-symbols-outlined" style="font-size: 18px;">close</span>
+            </button>
+        </div>
+    </header>
 
     <main>
+        <!-- Tab Bar -->
         <div class="tab-bar">
             <button class="tab-btn active" data-tab="in-office" onclick="switchTab('in-office')">
                 <span class="material-symbols-outlined">desk</span>
@@ -866,13 +982,70 @@
             </button>
         </div>
 
+        <!-- Filter & Sorting Navigation Bar -->
+        <div class="filter-controls-bar">
+            <!-- Ward Filter Dropdown -->
+            <select id="filterWard" class="filter-select" onchange="applyFiltersAndRender()">
+                <option value="">All Wards</option>
+                <option value="1">Ward 1</option>
+                <option value="2">Ward 2</option>
+                <option value="3">Ward 3</option>
+                <option value="4">Ward 4</option>
+                <option value="5">Ward 5</option>
+                <option value="6">Ward 6</option>
+                <option value="7">Ward 7</option>
+                <option value="8">Ward 8</option>
+                <option value="9">Ward 9</option>
+                <option value="10">Ward 10</option>
+                <option value="11">Ward 11</option>
+                <option value="12">Ward 12</option>
+                <option value="13">Ward 13</option>
+                <option value="14">Ward 14</option>
+                <option value="15">Ward 15</option>
+                <option value="16">Ward 16</option>
+                <option value="17">Ward 17</option>
+                <option value="18">Ward 18</option>
+                <option value="19">Ward 19</option>
+                <option value="20">Ward 20</option>
+                <option value="21">Ward 21</option>
+                <option value="22">Ward 22</option>
+                <option value="23">Ward 23</option>
+                <option value="24">Ward 24</option>
+            </select>
+
+            <!-- Work Type Filter Dropdown -->
+            <select id="filterWork" class="filter-select" onchange="applyFiltersAndRender()">
+                <option value="">All Work Types</option>
+                <option value="Pension Enquiry">Pension Enquiry</option>
+                <option value="BPL Enquiry">BPL Enquiry</option>
+                <option value="VB-G RAM G Individual Asset Visit">VB-G RAM G Asset Visit</option>
+                <option value="VB-G RAM G Field Visit">VB-G RAM G Field Visit</option>
+                <option value="PMAY Geotagging">PMAY Geotagging</option>
+                <option value="PMAY Field Visit">PMAY Field Visit</option>
+                <option value="LIFE Field Visit">LIFE Field Visit</option>
+                <option value="Others">Others</option>
+            </select>
+
+            <!-- Sort A to Z Button -->
+            <button type="button" class="filter-chip-btn" id="sortAlphaBtn" onclick="toggleAlphaSort()">
+                <span class="material-symbols-outlined">sort_by_alpha</span>
+                <span id="sortAlphaText">Sort: Default</span>
+            </button>
+
+            <!-- Reset Filters -->
+            <button type="button" class="filter-chip-btn" id="resetFilterBtn" onclick="resetAllFilters()">
+                <span class="material-symbols-outlined">filter_alt_off</span>
+                <span>Reset</span>
+            </button>
+        </div>
+
         <div id="cardsContainer">
             <div id="cardsLoader">Loading tasks...</div>
         </div>
     </main>
 
     <nav class="bottom-nav">
-        <button class="nav-item active" onclick="switchTab('in-office')">
+        <button class="nav-item active" id="homeNavBtn">
             <span class="material-symbols-outlined">home</span>
             <span>Home</span>
         </button>
@@ -1004,6 +1177,7 @@
             <form id="todoForm">
                 <div class="form-group">
                     <div class="form-row">
+                        <!-- Auto File Number generation supported if blank -->
                         <input type="text" id="fileNumber" placeholder="File Number (leave empty for auto)">
                         <select id="ward" required>
                             <option value="" disabled selected>Select Ward</option>
@@ -1265,6 +1439,15 @@
         const dataModal = document.getElementById('dataModal');
         const form = document.getElementById('todoForm');
         const cardsContainer = document.getElementById('cardsContainer');
+        const homeNavBtn = document.getElementById('homeNavBtn');
+
+        // Search & Filter Elements
+        const globalSearchInput = document.getElementById('globalSearchInput');
+        const searchClearBtn = document.getElementById('searchClearBtn');
+        const filterWard = document.getElementById('filterWard');
+        const filterWork = document.getElementById('filterWork');
+        const sortAlphaBtn = document.getElementById('sortAlphaBtn');
+        const sortAlphaText = document.getElementById('sortAlphaText');
 
         // Start Modal
         const startModal = document.getElementById('startModal');
@@ -1314,21 +1497,30 @@
         let currentTab = 'in-office';
         let allTasks = [];
         let currentlyViewedTask = null;
+        let currentSortOrder = 'default'; // 'default', 'asc', 'desc'
 
-        // Temporary storage for 4 photo Blobs
         const selectedPhotos = [null, null, null, null];
 
         const getLocalDrafts = () => JSON.parse(localStorage.getItem('in_office_tasks') || '[]');
         const saveLocalDrafts = (tasks) => localStorage.setItem('in_office_tasks', JSON.stringify(tasks));
 
-        // Utility: Open any modal and immediately scroll to top
+        // Generate 6-char random alphanumeric string + year (e.g. xe34d3-2026)
+        function generateFileNumber() {
+            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            let randomPart = '';
+            for (let i = 0; i < 6; i++) {
+                randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            const currentYear = new Date().getFullYear();
+            return `${randomPart}-${currentYear}`;
+        }
+
         function openModal(modalElement) {
             modalElement.classList.add('active');
             const content = modalElement.querySelector('.modal-content');
             if (content) content.scrollTop = 0;
         }
 
-        // Toggle manual work entry input
         function handleWorkChange(value) {
             const customWorkInput = document.getElementById('customWork');
             if (value === 'Others') {
@@ -1341,6 +1533,56 @@
                 customWorkInput.value = '';
             }
         }
+
+        // Search & Filter event listeners
+        globalSearchInput.addEventListener('input', () => {
+            searchClearBtn.style.display = globalSearchInput.value.trim() ? 'flex' : 'none';
+            applyFiltersAndRender();
+        });
+
+        searchClearBtn.addEventListener('click', () => {
+            globalSearchInput.value = '';
+            searchClearBtn.style.display = 'none';
+            applyFiltersAndRender();
+        });
+
+        function toggleAlphaSort() {
+            if (currentSortOrder === 'default') {
+                currentSortOrder = 'asc';
+                sortAlphaText.textContent = 'Sort: A → Z';
+                sortAlphaBtn.classList.add('active');
+            } else if (currentSortOrder === 'asc') {
+                currentSortOrder = 'desc';
+                sortAlphaText.textContent = 'Sort: Z → A';
+                sortAlphaBtn.classList.add('active');
+            } else {
+                currentSortOrder = 'default';
+                sortAlphaText.textContent = 'Sort: Default';
+                sortAlphaBtn.classList.remove('active');
+            }
+            applyFiltersAndRender();
+        }
+
+        function resetAllFilters() {
+            globalSearchInput.value = '';
+            searchClearBtn.style.display = 'none';
+            filterWard.value = '';
+            filterWork.value = '';
+            currentSortOrder = 'default';
+            sortAlphaText.textContent = 'Sort: Default';
+            sortAlphaBtn.classList.remove('active');
+            applyFiltersAndRender();
+        }
+
+        homeNavBtn.addEventListener('click', () => {
+            if (detailPage.classList.contains('active')) {
+                detailPage.classList.remove('active');
+                currentlyViewedTask = null;
+            }
+            document.querySelectorAll('.modal-overlay.active').forEach(m => m.classList.remove('active'));
+            switchTab('in-office');
+            document.querySelector('main').scrollTo({ top: 0, behavior: 'smooth' });
+        });
 
         openModalBtn.addEventListener('click', () => {
             form.reset();
@@ -1371,7 +1613,7 @@
             document.querySelectorAll('.tab-btn').forEach(btn => {
                 btn.classList.toggle('active', btn.dataset.tab === tabName);
             });
-            renderCards();
+            applyFiltersAndRender();
         }
 
         function updateBadges(inOfficeCount, onFieldCount, completedCount) {
@@ -1393,18 +1635,17 @@
                 .then(sheetTasks => {
                     const drafts = getLocalDrafts().map(t => ({ ...t, status: 'In Office' }));
                     allTasks = [...drafts, ...(sheetTasks || [])];
-                    renderCards();
+                    applyFiltersAndRender();
                 })
                 .catch(err => {
                     console.warn("Could not sync with Google Sheets, loading local only:", err);
                     allTasks = getLocalDrafts().map(t => ({ ...t, status: 'In Office' }));
-                    renderCards();
+                    applyFiltersAndRender();
                 });
         }
 
-        function renderCards() {
-            cardsContainer.innerHTML = "";
-
+        // Filter, Search, Sort & Render Engine
+        function applyFiltersAndRender() {
             const inOfficeCount = allTasks.filter(t => (t.status || 'In Office').toLowerCase() === 'in office').length;
             const onFieldCount = allTasks.filter(t => (t.status || '').toLowerCase() === 'on field').length;
             const completedCount = allTasks.filter(t => {
@@ -1414,7 +1655,8 @@
 
             updateBadges(inOfficeCount, onFieldCount, completedCount);
 
-            const filtered = allTasks.filter(t => {
+            // 1. Tab Status Filter
+            let list = allTasks.filter(t => {
                 const s = (t.status || 'In Office').toLowerCase();
                 if (currentTab === 'in-office') return s === 'in office';
                 if (currentTab === 'on-field') return s === 'on field';
@@ -1422,8 +1664,62 @@
                 return false;
             });
 
+            // 2. Global Universal Search Filter
+            const searchKeyword = (globalSearchInput.value || '').trim().toLowerCase();
+            if (searchKeyword) {
+                list = list.filter(t => {
+                    const haystack = [
+                        t.fileNumber,
+                        t.name,
+                        t.address,
+                        t.mobile,
+                        t.ward,
+                        t.work,
+                        t.place,
+                        t.route,
+                        t.remarks
+                    ].map(v => (v || '').toString().toLowerCase()).join(' ');
+
+                    return haystack.includes(searchKeyword);
+                });
+            }
+
+            // 3. Ward Filter
+            const selectedWard = filterWard.value;
+            if (selectedWard) {
+                list = list.filter(t => String(t.ward || '').trim() === selectedWard);
+            }
+
+            // 4. Type of Work Filter
+            const selectedWork = filterWork.value;
+            if (selectedWork) {
+                const standardOptions = [
+                    "Pension Enquiry", "BPL Enquiry", "VB-G RAM G Individual Asset Visit",
+                    "VB-G RAM G Field Visit", "PMAY Geotagging", "PMAY Field Visit", "LIFE Field Visit"
+                ];
+
+                if (selectedWork === "Others") {
+                    list = list.filter(t => !standardOptions.includes(t.work || ''));
+                } else {
+                    list = list.filter(t => (t.work || '') === selectedWork);
+                }
+            }
+
+            // 5. Alphabetical Sort
+            if (currentSortOrder === 'asc') {
+                list.sort((a, b) => parseInt(a.ward || 0, 10) - parseInt(b.ward || 0, 10));
+            } else if (currentSortOrder === 'desc') {
+                list.sort((a, b) => parseInt(b.ward || 0, 10) - parseInt(a.ward || 0, 10));
+            }
+
+            renderCards(list);
+        }
+
+        function renderCards(filtered) {
+            cardsContainer.innerHTML = "";
+
             if (filtered.length === 0) {
-                cardsContainer.innerHTML = `<div id="cardsLoader">No tasks in ${currentTab.replace('-', ' ')}.</div>`;
+                cardsContainer.innerHTML = `<div id="cardsLoader">No matching tasks found.</div>`;
                 return;
             }
 
@@ -1999,21 +2295,12 @@
                     finalCompleteSubmitBtn.classList.remove('loading');
                 });
         });
-        // Function to generate a 6-character random alphanumeric string + current year (e.g., xe34d3-2026)
-        function generateFileNumber() {
-            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-            let randomPart = '';
-            for (let i = 0; i < 6; i++) {
-                randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
-            const currentYear = new Date().getFullYear();
-            return `${randomPart}-${currentYear}`;
-        }
+
         form.addEventListener('submit', (e) => {
             e.preventDefault();
 
             const inputVal = document.getElementById("fileNumber").value.trim();
-            // Use manual entry if provided; otherwise auto-generate xe34d3-2026
+            // Automatically assign generated alphanumeric file number if empty
             const assignedFileNumber = inputVal !== "" ? inputVal : generateFileNumber();
 
             const workSelect = document.getElementById("work").value;
@@ -2046,6 +2333,7 @@
             switchTab('in-office');
             loadAllData();
         });
+
         function handleStart(fileNumber) {
             activeStartFileNumber.value = fileNumber;
             const now = new Date();
@@ -2202,14 +2490,12 @@
         pushDummyHistory();
 
         window.addEventListener("popstate", (e) => {
-            // Priority 1: Close fullscreen lightbox if active
             if (imageViewerOverlay.classList.contains("active")) {
                 closeImageViewer();
                 pushDummyHistory();
                 return;
             }
 
-            // Priority 2: Close full-page detail view if active
             if (detailPage.classList.contains("active")) {
                 detailPage.classList.remove("active");
                 currentlyViewedTask = null;
@@ -2217,7 +2503,6 @@
                 return;
             }
 
-            // Priority 3: Close any active modal
             const activeModal = document.querySelector(".modal-overlay.active");
             if (activeModal) {
                 activeModal.classList.remove("active");
@@ -2225,7 +2510,6 @@
                 return;
             }
 
-            // Priority 4: On root dashboard, prompt before allowing app exit
             const confirmExit = confirm("Do you want to exit the application?");
             if (confirmExit) {
                 attemptAppExit();
