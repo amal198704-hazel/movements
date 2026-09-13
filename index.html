@@ -1047,7 +1047,7 @@
         </div>
     </div>
 
-    <!-- MODAL 3: INSPECTION WITH CAMERA & REAL GPS -->
+    <!-- MODAL 3: INSPECTION WITH GALLERY & REAL GPS -->
     <div class="modal-overlay" id="inspectModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -1095,48 +1095,48 @@
                         <span id="gpsStatusText">Capture Live GPS Location (Optional)</span>
                     </button>
 
-                    <!-- 4 Slots Camera Capture & Client Compression -->
+                    <!-- 4 Slots Choose from Gallery & Client Compression -->
                     <div class="upload-section">
                         <label>
-                            <span class="material-symbols-outlined">photo_camera</span>
-                            Take Site Photos (Max 4, Optional)
+                            <span class="material-symbols-outlined">photo_library</span>
+                            Choose Photos from Gallery (Max 4, Optional)
                         </label>
                         <div class="thumb-grid">
                             <div class="thumb-box" onclick="document.getElementById('inspectPhotoInput1').click()">
                                 <img id="inspectImgPrev1" src="" style="display: none;">
                                 <div class="thumb-placeholder" id="inspectPlc1">
-                                    <span class="material-symbols-outlined">add_a_photo</span>
+                                    <span class="material-symbols-outlined">image</span>
                                     <span>Slot 1</span>
                                 </div>
-                                <input type="file" accept="image/*" capture="environment" class="thumb-file-input"
-                                    id="inspectPhotoInput1" onchange="handlePhotoSelect(1, event)">
+                                <input type="file" accept="image/*" class="thumb-file-input" id="inspectPhotoInput1"
+                                    onchange="handlePhotoSelect(1, event)">
                             </div>
                             <div class="thumb-box" onclick="document.getElementById('inspectPhotoInput2').click()">
                                 <img id="inspectImgPrev2" src="" style="display: none;">
                                 <div class="thumb-placeholder" id="inspectPlc2">
-                                    <span class="material-symbols-outlined">add_a_photo</span>
+                                    <span class="material-symbols-outlined">image</span>
                                     <span>Slot 2</span>
                                 </div>
-                                <input type="file" accept="image/*" capture="environment" class="thumb-file-input"
-                                    id="inspectPhotoInput2" onchange="handlePhotoSelect(2, event)">
+                                <input type="file" accept="image/*" class="thumb-file-input" id="inspectPhotoInput2"
+                                    onchange="handlePhotoSelect(2, event)">
                             </div>
                             <div class="thumb-box" onclick="document.getElementById('inspectPhotoInput3').click()">
                                 <img id="inspectImgPrev3" src="" style="display: none;">
                                 <div class="thumb-placeholder" id="inspectPlc3">
-                                    <span class="material-symbols-outlined">add_a_photo</span>
+                                    <span class="material-symbols-outlined">image</span>
                                     <span>Slot 3</span>
                                 </div>
-                                <input type="file" accept="image/*" capture="environment" class="thumb-file-input"
-                                    id="inspectPhotoInput3" onchange="handlePhotoSelect(3, event)">
+                                <input type="file" accept="image/*" class="thumb-file-input" id="inspectPhotoInput3"
+                                    onchange="handlePhotoSelect(3, event)">
                             </div>
                             <div class="thumb-box" onclick="document.getElementById('inspectPhotoInput4').click()">
                                 <img id="inspectImgPrev4" src="" style="display: none;">
                                 <div class="thumb-placeholder" id="inspectPlc4">
-                                    <span class="material-symbols-outlined">add_a_photo</span>
+                                    <span class="material-symbols-outlined">image</span>
                                     <span>Slot 4</span>
                                 </div>
-                                <input type="file" accept="image/*" capture="environment" class="thumb-file-input"
-                                    id="inspectPhotoInput4" onchange="handlePhotoSelect(4, event)">
+                                <input type="file" accept="image/*" class="thumb-file-input" id="inspectPhotoInput4"
+                                    onchange="handlePhotoSelect(4, event)">
                             </div>
                         </div>
                     </div>
@@ -1208,8 +1208,8 @@
         // ==========================================
         // REPLACE WITH YOUR CLOUDINARY CONFIG
         // ==========================================
-        const CLOUD_NAME = "YOUR_CLOUD_NAME";
-        const UPLOAD_PRESET = "YOUR_UPLOAD_PRESET";
+        const CLOUD_NAME = "dpeuqcbtm";
+        const UPLOAD_PRESET = "movement_register";
         const api = "https://script.google.com/macros/s/AKfycbySLnyYj8QHF3-dXiUEW6Oxk9OH788U3oXfDdSmGgiv_PPqupLQykz1XY7HoyVviZ-7/exec";
 
         // Navigation & Modals
@@ -1495,7 +1495,7 @@
         // ==========================================
         // CLIENT IMAGE COMPRESSION (CANVAS API)
         // ==========================================
-        function compressImage(file, maxDimension = 1600, quality = 0.82) {
+        function compressImage(file, maxDimension = 1280, quality = 0.78) {
             return new Promise((resolve, reject) => {
                 const img = new Image();
                 const reader = new FileReader();
