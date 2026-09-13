@@ -28,7 +28,7 @@
             overflow: hidden;
         }
 
-        /* App Header with Rainbow Gradient Accent */
+        /* App Header */
         header {
             background: #ffffff;
             padding: 16px 20px;
@@ -51,7 +51,7 @@
             padding-bottom: 90px;
         }
 
-        /* Tab Switcher Navigation Bar */
+        /* Tab Switcher */
         .tab-bar {
             display: flex;
             background: #ffffff;
@@ -109,7 +109,7 @@
             gap: 14px;
         }
 
-        /* Task Card Styling */
+        /* Task Card */
         .task-card {
             background: #ffffff;
             border-radius: 16px;
@@ -268,7 +268,7 @@
             font-size: 16px;
         }
 
-        /* Bottom Navigation Bar */
+        /* Bottom Nav */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -302,7 +302,6 @@
             color: #e024c3;
         }
 
-        /* Floating Center Plus Button */
         .nav-plus-wrapper {
             position: relative;
             flex: 1;
@@ -337,7 +336,130 @@
             font-size: 32px;
         }
 
-        /* Modals Generic Setup */
+        /* Full Screen Detail Page View */
+        .detail-page {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #f7f3f9;
+            z-index: 200;
+            display: flex;
+            flex-direction: column;
+            transform: translateX(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .detail-page.active {
+            transform: translateX(0);
+        }
+
+        .detail-header {
+            background: #ffffff;
+            padding: 14px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .detail-back-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #555;
+            display: flex;
+            align-items: center;
+        }
+
+        .detail-body {
+            flex: 1;
+            padding: 16px;
+            overflow-y: auto;
+            padding-bottom: 40px;
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .detail-card {
+            background: #ffffff;
+            border-radius: 18px;
+            padding: 18px;
+            box-shadow: 0 4px 15px rgba(155, 81, 224, 0.06);
+        }
+
+        .detail-map-frame {
+            width: 100%;
+            height: 190px;
+            border-radius: 14px;
+            border: 1px solid #e2e8f0;
+            overflow: hidden;
+            background: #e2e8f0;
+        }
+
+        .detail-map-frame iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+        }
+
+        /* 4-Image Grid */
+        .thumb-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-top: 10px;
+        }
+
+        .thumb-box {
+            position: relative;
+            aspect-ratio: 1 / 1;
+            background: #faf7fc;
+            border: 1.5px dashed #d8b4e2;
+            border-radius: 14px;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+        }
+
+        .thumb-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumb-placeholder {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #9b51e0;
+            font-size: 0.72rem;
+            font-weight: 600;
+        }
+
+        .thumb-placeholder .material-symbols-outlined {
+            font-size: 26px;
+        }
+
+        .thumb-file-input {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            cursor: pointer;
+        }
+
+        /* Modals */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -352,7 +474,7 @@
             visibility: hidden;
             opacity: 0;
             transition: opacity 0.25s ease, visibility 0.25s ease;
-            z-index: 100;
+            z-index: 300;
             padding: 16px;
         }
 
@@ -452,27 +574,12 @@
             resize: none;
         }
 
-        /* Animated Pride Spectrum Glow on Focus */
         @keyframes rainbowGlow {
-            0% {
-                box-shadow: 0 0 0 2px #ff416c, 0 0 12px rgba(255, 65, 108, 0.6);
-            }
-
-            25% {
-                box-shadow: 0 0 0 2px #ff8a00, 0 0 12px rgba(255, 138, 0, 0.6);
-            }
-
-            50% {
-                box-shadow: 0 0 0 2px #00b09b, 0 0 12px rgba(0, 176, 155, 0.6);
-            }
-
-            75% {
-                box-shadow: 0 0 0 2px #9b51e0, 0 0 12px rgba(155, 81, 224, 0.6);
-            }
-
-            100% {
-                box-shadow: 0 0 0 2px #ff416c, 0 0 12px rgba(255, 65, 108, 0.6);
-            }
+            0% { box-shadow: 0 0 0 2px #ff416c, 0 0 12px rgba(255, 65, 108, 0.6); }
+            25% { box-shadow: 0 0 0 2px #ff8a00, 0 0 12px rgba(255, 138, 0, 0.6); }
+            50% { box-shadow: 0 0 0 2px #00b09b, 0 0 12px rgba(0, 176, 155, 0.6); }
+            75% { box-shadow: 0 0 0 2px #9b51e0, 0 0 12px rgba(155, 81, 224, 0.6); }
+            100% { box-shadow: 0 0 0 2px #ff416c, 0 0 12px rgba(255, 65, 108, 0.6); }
         }
 
         .form-group input:focus,
@@ -483,17 +590,9 @@
         }
 
         @keyframes gradientShift {
-            0% {
-                background-position: 0% 50%;
-            }
-
-            50% {
-                background-position: 100% 50%;
-            }
-
-            100% {
-                background-position: 0% 50%;
-            }
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
         }
 
         .submit-btn {
@@ -597,7 +696,7 @@
             margin-bottom: 8px;
         }
 
-        /* Loading Spinner */
+        /* Spinner */
         .spinner {
             display: none;
             width: 18px;
@@ -613,9 +712,7 @@
         }
 
         @keyframes spin {
-            to {
-                transform: rotate(360deg);
-            }
+            to { transform: rotate(360deg); }
         }
 
         #cardsLoader {
@@ -674,7 +771,119 @@
         </button>
     </nav>
 
-    <!-- Modal 1: Data Entry Draft Modal (In Office) -->
+    <!-- FULL PAGE: TASK DETAIL SCREEN -->
+    <div class="detail-page" id="detailPage">
+        <div class="detail-header">
+            <button class="detail-back-btn" id="detailBackBtn">
+                <span class="material-symbols-outlined" style="font-size: 28px;">arrow_back</span>
+            </button>
+            <h3 style="font-size: 1.1rem; font-weight: 700;" id="detailHeaderTitle">Task Details</h3>
+            <span style="width: 28px;"></span>
+        </div>
+
+        <div class="detail-body">
+            <!-- Applicant & Info Card -->
+            <div class="detail-card">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                    <span class="file-badge" id="detailFileNumber">#000</span>
+                    <span class="ward-tag" id="detailWard">Ward: -</span>
+                </div>
+                <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 4px;" id="detailApplicantName">Applicant Name</h2>
+                <div style="font-size: 0.9rem; color: #555; margin-bottom: 8px;" id="detailAddress">House Name, Place</div>
+                <div style="font-size: 0.88rem; color: #666; margin-bottom: 8px;">
+                    <strong>Work:</strong> <span id="detailWork">-</span>
+                </div>
+                <div class="task-detail" style="margin-bottom: 4px;">
+                    <span class="material-symbols-outlined">call</span>
+                    <a href="#" id="detailMobile" class="task-call-btn">-</a>
+                </div>
+                <div class="route-box" style="margin-top: 10px;" id="detailRouteBox">
+                    <strong>Route:</strong> <span id="detailRoute">-</span>
+                </div>
+            </div>
+
+            <!-- Inspection Findings -->
+            <div class="detail-card" id="detailInspectionSection">
+                <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: #166534; display: flex; align-items: center; gap: 6px;">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">verified</span>
+                    Field Inspection Data
+                </h4>
+                <div style="font-size: 0.88rem; margin-bottom: 4px;">
+                    <strong>Eligibility:</strong> <span id="detailEligibility">-</span>
+                </div>
+                <div style="font-size: 0.88rem; margin-bottom: 6px;">
+                    <strong>Remarks:</strong> <span id="detailRemarks">-</span>
+                </div>
+                <div style="font-size: 0.8rem; color: #777;">
+                    <strong>Inspected on:</strong> <span id="detailInspectDateTime">-</span>
+                </div>
+            </div>
+
+            <!-- Live Map Card -->
+            <div class="detail-card">
+                <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; color: #0284c7;">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">map</span>
+                    Location Map
+                </h4>
+                <div class="detail-map-frame">
+                    <iframe id="detailMapIframe" src="https://www.openstreetmap.org/export/embed.html?bbox=75.7,11.2,75.9,11.3&layer=mapnik"></iframe>
+                </div>
+            </div>
+
+            <!-- 4-Image Grid Card -->
+            <div class="detail-card">
+                <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; color: #9b51e0;">
+                    <span class="material-symbols-outlined" style="font-size: 18px;">photo_library</span>
+                    Inspection Photos (4 Slots)
+                </h4>
+                <div class="thumb-grid">
+                    <div class="thumb-box" onclick="triggerThumbUpload(1)">
+                        <img id="thumbImg1" src="" style="display: none;">
+                        <div class="thumb-placeholder" id="thumbPlc1">
+                            <span class="material-symbols-outlined">add_a_photo</span>
+                            <span>Photo 1</span>
+                        </div>
+                        <input type="file" accept="image/*" class="thumb-file-input" id="thumbInput1" onchange="previewThumb(1, event)">
+                    </div>
+
+                    <div class="thumb-box" onclick="triggerThumbUpload(2)">
+                        <img id="thumbImg2" src="" style="display: none;">
+                        <div class="thumb-placeholder" id="thumbPlc2">
+                            <span class="material-symbols-outlined">add_a_photo</span>
+                            <span>Photo 2</span>
+                        </div>
+                        <input type="file" accept="image/*" class="thumb-file-input" id="thumbInput2" onchange="previewThumb(2, event)">
+                    </div>
+
+                    <div class="thumb-box" onclick="triggerThumbUpload(3)">
+                        <img id="thumbImg3" src="" style="display: none;">
+                        <div class="thumb-placeholder" id="thumbPlc3">
+                            <span class="material-symbols-outlined">add_a_photo</span>
+                            <span>Photo 3</span>
+                        </div>
+                        <input type="file" accept="image/*" class="thumb-file-input" id="thumbInput3" onchange="previewThumb(3, event)">
+                    </div>
+
+                    <div class="thumb-box" onclick="triggerThumbUpload(4)">
+                        <img id="thumbImg4" src="" style="display: none;">
+                        <div class="thumb-placeholder" id="thumbPlc4">
+                            <span class="material-symbols-outlined">add_a_photo</span>
+                            <span>Photo 4</span>
+                        </div>
+                        <input type="file" accept="image/*" class="thumb-file-input" id="thumbInput4" onchange="previewThumb(4, event)">
+                    </div>
+                </div>
+            </div>
+
+            <!-- Set Completion Date/Time Button -->
+            <button class="submit-btn" id="openCompleteModalFromDetailBtn" style="margin-top: 10px;">
+                <span class="material-symbols-outlined">event_available</span>
+                <span class="btn-text">Set Completion Date & Time</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- MODAL 1: DRAFT (IN OFFICE) -->
     <div class="modal-overlay" id="dataModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -708,7 +917,7 @@
         </div>
     </div>
 
-    <!-- Modal 2: Start Modal for Out Date & Out Time -->
+    <!-- MODAL 2: START (ON FIELD) -->
     <div class="modal-overlay" id="startModal">
         <div class="modal-content" style="max-width: 380px;">
             <div class="modal-header">
@@ -720,8 +929,7 @@
                 <input type="hidden" id="activeStartFileNumber">
 
                 <div class="form-group">
-                    <label style="font-size: 0.85rem; color: #666; margin-bottom: 6px; display: block;">Select Out Date
-                        & Time</label>
+                    <label style="font-size: 0.85rem; color: #666; margin-bottom: 6px; display: block;">Select Out Date & Time</label>
                     <div class="form-row">
                         <input type="date" id="startDueDate" required>
                         <input type="time" id="startTime" required>
@@ -736,7 +944,7 @@
         </div>
     </div>
 
-    <!-- Modal 3: Inspection Modal (On Field) -->
+    <!-- MODAL 3: INSPECTION -->
     <div class="modal-overlay" id="inspectModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -747,31 +955,23 @@
             <form id="inspectForm">
                 <input type="hidden" id="inspectFileNumber">
 
-                <div
-                    style="margin-bottom: 14px; background: #faf7fc; padding: 10px 14px; border-radius: 12px; border-left: 4px solid #9b51e0;">
+                <div style="margin-bottom: 14px; background: #faf7fc; padding: 10px 14px; border-radius: 12px; border-left: 4px solid #9b51e0;">
                     <div style="font-weight: 700; color: #333;" id="inspectApplicantInfo">Applicant Name</div>
                     <div style="font-size: 0.8rem; color: #777;" id="inspectFileInfo">File: #000</div>
                 </div>
 
                 <div class="form-group">
-                    <label
-                        style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Eligibility
-                        Status</label>
+                    <label style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Eligibility Status</label>
                     <select id="inspectEligibility" required>
                         <option value="Eligible">Eligible</option>
                         <option value="Ineligible">Ineligible</option>
                         <option value="Pending / Inquiry">Pending / Inquiry</option>
                     </select>
 
-                    <label
-                        style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Field
-                        Remarks</label>
-                    <textarea id="inspectRemarks" rows="3" placeholder="Enter remarks, verifications, site condition..."
-                        required></textarea>
+                    <label style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Field Remarks</label>
+                    <textarea id="inspectRemarks" rows="3" placeholder="Enter remarks, verifications, site condition..." required></textarea>
 
-                    <label
-                        style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Inspection
-                        Date & Time</label>
+                    <label style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Inspection Date & Time</label>
                     <div class="form-row">
                         <input type="date" id="inspectDate" required>
                         <input type="time" id="inspectTime" required>
@@ -787,8 +987,7 @@
                             <span class="material-symbols-outlined">add_a_photo</span>
                             Upload Site Photos (Dummy)
                         </label>
-                        <input type="file" accept="image/*" multiple
-                            style="margin-bottom: 0; font-size: 0.8rem; background: transparent; border: none; padding: 0;">
+                        <input type="file" accept="image/*" multiple style="margin-bottom: 0; font-size: 0.8rem; background: transparent; border: none; padding: 0;">
                     </div>
 
                     <div class="upload-section">
@@ -796,8 +995,7 @@
                             <span class="material-symbols-outlined">picture_as_pdf</span>
                             Attach Field Report PDF (Dummy)
                         </label>
-                        <input type="file" accept="application/pdf"
-                            style="margin-bottom: 0; font-size: 0.8rem; background: transparent; border: none; padding: 0;">
+                        <input type="file" accept="application/pdf" style="margin-bottom: 0; font-size: 0.8rem; background: transparent; border: none; padding: 0;">
                     </div>
                 </div>
 
@@ -813,10 +1011,37 @@
         </div>
     </div>
 
+    <!-- MODAL 4: DATE & TIME PICKER MODAL -->
+    <div class="modal-overlay" id="completeModal">
+        <div class="modal-content" style="max-width: 380px;">
+            <div class="modal-header">
+                <h3 id="completeModalTitle">Complete Task</h3>
+                <button class="close-btn" id="closeCompleteModalBtn">&times;</button>
+            </div>
+
+            <form id="completeTaskForm">
+                <input type="hidden" id="activeCompleteFileNumber">
+
+                <div class="form-group">
+                    <label style="font-size: 0.85rem; color: #666; margin-bottom: 6px; display: block;">Select Completion Date & Time</label>
+                    <div class="form-row">
+                        <input type="date" id="finalDueDate" required>
+                        <input type="time" id="finalTime" required>
+                    </div>
+                </div>
+
+                <button type="submit" id="finalCompleteSubmitBtn" class="submit-btn">
+                    <span class="spinner" aria-hidden="true"></span>
+                    <span class="btn-text">Save & Mark Done</span>
+                </button>
+            </form>
+        </div>
+    </div>
+
     <script>
         const api = "https://script.google.com/macros/s/AKfycbySLnyYj8QHF3-dXiUEW6Oxk9OH788U3oXfDdSmGgiv_PPqupLQykz1XY7HoyVviZ-7/exec";
 
-        // DOM Elements
+        // Navigation & General Elements
         const openModalBtn = document.getElementById('openModalBtn');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const dataModal = document.getElementById('dataModal');
@@ -846,25 +1071,47 @@
         const gpsStatusText = document.getElementById('gpsStatusText');
         const completeInspectSubmitBtn = document.getElementById('completeInspectSubmitBtn');
 
-        // State variables
+        // Detail Page Elements
+        const detailPage = document.getElementById('detailPage');
+        const detailBackBtn = document.getElementById('detailBackBtn');
+        const openCompleteModalFromDetailBtn = document.getElementById('openCompleteModalFromDetailBtn');
+
+        // Completion Modal Elements
+        const completeModal = document.getElementById('completeModal');
+        const closeCompleteModalBtn = document.getElementById('closeCompleteModalBtn');
+        const completeTaskForm = document.getElementById('completeTaskForm');
+        const finalCompleteSubmitBtn = document.getElementById('finalCompleteSubmitBtn');
+        const activeCompleteFileNumber = document.getElementById('activeCompleteFileNumber');
+        const finalDueDate = document.getElementById('finalDueDate');
+        const finalTime = document.getElementById('finalTime');
+        const completeModalTitle = document.getElementById('completeModalTitle');
+
         let currentTab = 'in-office';
         let allTasks = [];
+        let currentlyViewedTask = null;
 
-        // Storage Helpers
         const getLocalDrafts = () => JSON.parse(localStorage.getItem('in_office_tasks') || '[]');
         const saveLocalDrafts = (tasks) => localStorage.setItem('in_office_tasks', JSON.stringify(tasks));
 
-        // Modal Controls
+        // Event Listeners for Closing Modals
         openModalBtn.addEventListener('click', () => dataModal.classList.add('active'));
         closeModalBtn.addEventListener('click', () => dataModal.classList.remove('active'));
         closeStartModalBtn.addEventListener('click', () => startModal.classList.remove('active'));
         closeInspectModalBtn.addEventListener('click', () => inspectModal.classList.remove('active'));
         cancelInspectBtn.addEventListener('click', () => inspectModal.classList.remove('active'));
+        closeCompleteModalBtn.addEventListener('click', () => completeModal.classList.remove('active'));
+
+        // Detail Page Back Button
+        detailBackBtn.addEventListener('click', () => {
+            detailPage.classList.remove('active');
+            currentlyViewedTask = null;
+        });
 
         window.addEventListener('click', (e) => {
             if (e.target === dataModal) dataModal.classList.remove('active');
             if (e.target === startModal) startModal.classList.remove('active');
             if (e.target === inspectModal) inspectModal.classList.remove('active');
+            if (e.target === completeModal) completeModal.classList.remove('active');
         });
 
         // Tab Switching
@@ -876,14 +1123,13 @@
             renderCards();
         }
 
-        // Update Tab Badges Count
         function updateBadges(inOfficeCount, onFieldCount, completedCount) {
             document.getElementById('badge-in-office').textContent = inOfficeCount;
             document.getElementById('badge-on-field').textContent = onFieldCount;
             document.getElementById('badge-completed').textContent = completedCount;
         }
 
-        // 1. Initial Load: Fetch Sheet tasks & merge with local drafts
+        // 1. Initial Load
         window.addEventListener("DOMContentLoaded", loadAllData);
 
         function loadAllData() {
@@ -906,14 +1152,10 @@
                 });
         }
 
-        // 2. Render Cards based on selected tab
+        // 2. Render Cards
         function renderCards() {
             cardsContainer.innerHTML = "";
 
-            // Grouping logic:
-            // "In Office" -> local drafts
-            // "On Field"  -> status === "On Field"
-            // "Completed" -> status === "Pending Complete" or status === "Completed"
             const inOfficeCount = allTasks.filter(t => (t.status || 'In Office').toLowerCase() === 'in office').length;
             const onFieldCount = allTasks.filter(t => (t.status || '').toLowerCase() === 'on field').length;
             const completedCount = allTasks.filter(t => {
@@ -1011,17 +1253,23 @@
                                     <span class="material-symbols-outlined">undo</span>
                                     <span>Return</span>
                                 </button>
-                                <button class="btn-action btn-complete-final" onclick="handleFinalComplete('${escapeHtml(task.fileNumber)}')">
-                                    <span class="material-symbols-outlined">check_circle</span>
-                                    <span>Complete</span>
+                                <button class="btn-action btn-complete-final" onclick="openDetailPage('${escapeHtml(task.fileNumber)}')">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                    <span>Review</span>
                                 </button>
                             ` : ''}
 
                             ${isFullyCompleted ? `
-                                <span style="font-size: 0.75rem; font-weight: 700; color: #10b981; display: flex; align-items: center; gap: 3px;">
-                                    <span class="material-symbols-outlined" style="font-size: 16px;">verified</span>
-                                    Done: ${escapeHtml(task.completedDate || '')}
-                                </span>
+                                <div style="display: flex; align-items: center; gap: 8px;">
+                                    <span style="font-size: 0.75rem; font-weight: 700; color: #10b981; display: flex; align-items: center; gap: 3px;">
+                                        <span class="material-symbols-outlined" style="font-size: 16px;">verified</span>
+                                        Done: ${escapeHtml(task.completedDate || '')}
+                                    </span>
+                                    <button class="btn-action btn-edit" onclick="openDetailPage('${escapeHtml(task.fileNumber)}')">
+                                        <span class="material-symbols-outlined">visibility</span>
+                                        <span>View</span>
+                                    </button>
+                                </div>
                             ` : ''}
                         </div>
                     </div>
@@ -1031,10 +1279,143 @@
             });
         }
 
-        // 3. Save Draft (In Office)
-        form.addEventListener('submit', (e) => {
+        // 3. Open Detail Page
+        function openDetailPage(fileNumber) {
+            const task = allTasks.find(t => t.fileNumber === fileNumber);
+            if (!task) return;
+
+            currentlyViewedTask = task;
+
+            // Fill text fields
+            document.getElementById('detailHeaderTitle').textContent = `File #${task.fileNumber}`;
+            document.getElementById('detailFileNumber').textContent = `#${task.fileNumber}`;
+            document.getElementById('detailWard').textContent = `Ward: ${task.ward || '-'}`;
+            document.getElementById('detailApplicantName').textContent = task.name || 'Unnamed Applicant';
+            document.getElementById('detailAddress').textContent = `${task.address || ''}${task.place ? ', ' + task.place : ''}`;
+            document.getElementById('detailWork').textContent = task.work || '-';
+            
+            const mobileEl = document.getElementById('detailMobile');
+            if (task.mobile) {
+                mobileEl.textContent = task.mobile;
+                mobileEl.href = `tel:${task.mobile}`;
+                mobileEl.style.display = "inline-flex";
+            } else {
+                mobileEl.style.display = "none";
+            }
+
+            document.getElementById('detailRoute').textContent = task.route || 'No route notes provided.';
+
+            // Inspection details
+            const inspectSection = document.getElementById('detailInspectionSection');
+            if (task.eligibility || task.remarks) {
+                inspectSection.style.display = "block";
+                document.getElementById('detailEligibility').textContent = task.eligibility || '-';
+                document.getElementById('detailRemarks').textContent = task.remarks || 'None';
+                document.getElementById('detailInspectDateTime').textContent = `${task.inspectDate || ''} ${task.inspectTime || ''}`;
+            } else {
+                inspectSection.style.display = "none";
+            }
+
+            // Update Map preview based on place name (using OpenStreetMap search query)
+            const mapQuery = encodeURIComponent(`${task.place || ''} ${task.ward || ''} Kerala`);
+            document.getElementById('detailMapIframe').src = `https://www.openstreetmap.org/export/embed.html?bbox=75.8,11.1,76.2,11.3&layer=mapnik`;
+
+            // Reset image thumbnails
+            for (let i = 1; i <= 4; i++) {
+                document.getElementById(`thumbImg${i}`).style.display = "none";
+                document.getElementById(`thumbImg${i}`).src = "";
+                document.getElementById(`thumbPlc${i}`).style.display = "flex";
+            }
+
+            // Button label inside detail page
+            const isDone = (task.status || '').toLowerCase() === 'completed';
+            openCompleteModalFromDetailBtn.querySelector('.btn-text').textContent = isDone ? "Edit Completion Date & Time" : "Set Completion Date & Time";
+
+            detailPage.classList.add('active');
+        }
+
+        // Image Thumbnails Trigger & Preview
+        function triggerThumbUpload(slot) {
+            document.getElementById(`thumbInput${slot}`).click();
+        }
+
+        function previewThumb(slot, event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = document.getElementById(`thumbImg${slot}`);
+                const plc = document.getElementById(`thumbPlc${slot}`);
+                img.src = e.target.result;
+                img.style.display = "block";
+                plc.style.display = "none";
+            };
+            reader.readAsDataURL(file);
+        }
+
+        // 4. Open Completion Modal From Detail View
+        openCompleteModalFromDetailBtn.addEventListener('click', () => {
+            if (!currentlyViewedTask) return;
+
+            activeCompleteFileNumber.value = currentlyViewedTask.fileNumber;
+
+            const now = new Date();
+            const curDate = now.toISOString().split('T')[0];
+            const curTime = now.toTimeString().slice(0, 5);
+
+            finalDueDate.value = currentlyViewedTask.completedDate || curDate;
+            finalTime.value = currentlyViewedTask.completedTime || curTime;
+
+            const isDone = (currentlyViewedTask.status || '').toLowerCase() === 'completed';
+            completeModalTitle.textContent = isDone ? "Edit Completion Date" : "Complete Task";
+
+            completeModal.classList.add('active');
+        });
+
+        // 5. Submit Completion Modal
+        completeTaskForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
+            const fileNumber = activeCompleteFileNumber.value;
+            const selectedDate = finalDueDate.value;
+            const selectedTime = finalTime.value;
+
+            finalCompleteSubmitBtn.disabled = true;
+            finalCompleteSubmitBtn.classList.add('loading');
+
+            fetch(api, {
+                method: "POST",
+                headers: { "Content-Type": "text/plain;charset=utf-8" },
+                body: JSON.stringify({
+                    action: "updateStatus",
+                    fileNumber: fileNumber,
+                    status: "Completed",
+                    completedDate: selectedDate,
+                    completedTime: selectedTime
+                })
+            })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    completeModal.classList.remove('active');
+                    detailPage.classList.remove('active');
+                    completeTaskForm.reset();
+                    loadAllData();
+                } else {
+                    alert("Could not update task: " + (data.message || "Server error"));
+                }
+            })
+            .catch(err => alert("Error: " + err.message))
+            .finally(() => {
+                finalCompleteSubmitBtn.disabled = false;
+                finalCompleteSubmitBtn.classList.remove('loading');
+            });
+        });
+
+        // 6. Drafts & Start handlers
+        form.addEventListener('submit', (e) => {
+            e.preventDefault();
             const newTask = {
                 fileNumber: document.getElementById("fileNumber").value.trim(),
                 ward: document.getElementById("ward").value.trim(),
@@ -1044,9 +1425,7 @@
                 work: document.getElementById("work").value.trim(),
                 place: document.getElementById("place").value.trim(),
                 route: document.getElementById("route").value.trim(),
-                outDate: "",
-                outTime: "",
-                status: "In Office"
+                outDate: "", outTime: "", status: "In Office"
             };
 
             const drafts = getLocalDrafts();
@@ -1057,34 +1436,24 @@
             saveLocalDrafts(drafts);
             form.reset();
             dataModal.classList.remove('active');
-
             switchTab('in-office');
             loadAllData();
         });
 
-        // 4. Open Start Modal
         function handleStart(fileNumber) {
             activeStartFileNumber.value = fileNumber;
-
             const now = new Date();
             startDueDate.value = now.toISOString().split('T')[0];
             startTime.value = now.toTimeString().slice(0, 5);
-
             startModal.classList.add('active');
         }
 
-        // 5. Submit Start: Uploads to Google Sheet -> "On Field"
         startTaskForm.addEventListener('submit', (e) => {
             e.preventDefault();
-
             const targetFileNumber = activeStartFileNumber.value;
             const drafts = getLocalDrafts();
             const draftIndex = drafts.findIndex(t => t.fileNumber === targetFileNumber);
-
-            if (draftIndex === -1) {
-                alert("Task not found in drafts!");
-                return;
-            }
+            if (draftIndex === -1) return;
 
             const payload = {
                 ...drafts[draftIndex],
@@ -1101,34 +1470,28 @@
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify(payload)
             })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === "success") {
-                        drafts.splice(draftIndex, 1);
-                        saveLocalDrafts(drafts);
-
-                        startModal.classList.remove('active');
-                        startTaskForm.reset();
-
-                        switchTab('on-field');
-                        loadAllData();
-                    } else {
-                        throw new Error(data.message || "Failed to upload task.");
-                    }
-                })
-                .catch(err => {
-                    alert(`Error: ${err.message}`);
-                })
-                .finally(() => {
-                    startSubmitBtn.disabled = false;
-                    startSubmitBtn.classList.remove('loading');
-                });
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    drafts.splice(draftIndex, 1);
+                    saveLocalDrafts(drafts);
+                    startModal.classList.remove('active');
+                    startTaskForm.reset();
+                    switchTab('on-field');
+                    loadAllData();
+                } else {
+                    throw new Error(data.message || "Failed to upload task.");
+                }
+            })
+            .catch(err => alert(`Error: ${err.message}`))
+            .finally(() => {
+                startSubmitBtn.disabled = false;
+                startSubmitBtn.classList.remove('loading');
+            });
         });
 
-        // 6. Send Back: Delete row from Google Sheet & restore to In Office
         function handleSendBack(fileNumber) {
             if (!confirm(`Send task #${fileNumber} back to In Office? It will be removed from Google Sheets.`)) return;
-
             const task = allTasks.find(t => t.fileNumber === fileNumber);
             if (!task) return;
 
@@ -1137,28 +1500,25 @@
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify({ action: "deleteTask", fileNumber: fileNumber })
             })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === "success") {
-                        const drafts = getLocalDrafts();
-                        const draftTask = { ...task, status: "In Office", outDate: "", outTime: "" };
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    const drafts = getLocalDrafts();
+                    const draftTask = { ...task, status: "In Office", outDate: "", outTime: "" };
+                    const idx = drafts.findIndex(t => t.fileNumber === fileNumber);
+                    if (idx > -1) drafts[idx] = draftTask;
+                    else drafts.push(draftTask);
 
-                        const idx = drafts.findIndex(t => t.fileNumber === fileNumber);
-                        if (idx > -1) drafts[idx] = draftTask;
-                        else drafts.push(draftTask);
-
-                        saveLocalDrafts(drafts);
-
-                        switchTab('in-office');
-                        loadAllData();
-                    } else {
-                        alert("Failed to send back: " + (data.message || "Server error"));
-                    }
-                })
-                .catch(err => alert("Error: " + err.message));
+                    saveLocalDrafts(drafts);
+                    switchTab('in-office');
+                    loadAllData();
+                } else {
+                    alert("Failed to send back: " + (data.message || "Server error"));
+                }
+            })
+            .catch(err => alert("Error: " + err.message));
         }
 
-        // 7. Open Inspection Modal
         function handleInspect(fileNumber) {
             const task = allTasks.find(t => t.fileNumber === fileNumber);
             if (!task) return;
@@ -1178,7 +1538,6 @@
             inspectModal.classList.add('active');
         }
 
-        // Dummy GPS Click Handler
         gpsBtn.addEventListener('click', () => {
             gpsStatusText.textContent = "Acquiring GPS...";
             setTimeout(() => {
@@ -1189,27 +1548,19 @@
             }, 800);
         });
 
-        // 8. Submit Inspection: Moves task to "Completed" Tab (as 'Pending Complete')
         inspectForm.addEventListener('submit', (e) => {
             e.preventDefault();
-
-            const fileNumber = inspectFileNumber.value;
-            const eligibility = document.getElementById('inspectEligibility').value;
-            const remarks = document.getElementById('inspectRemarks').value.trim();
-            const date = inspectDate.value;
-            const time = inspectTime.value;
-
             completeInspectSubmitBtn.disabled = true;
             completeInspectSubmitBtn.classList.add('loading');
 
             const payload = {
                 action: "submitInspection",
-                fileNumber: fileNumber,
+                fileNumber: inspectFileNumber.value,
                 status: "Pending Complete",
-                eligibility: eligibility,
-                remarks: remarks,
-                inspectDate: date,
-                inspectTime: time
+                eligibility: document.getElementById('inspectEligibility').value,
+                remarks: document.getElementById('inspectRemarks').value.trim(),
+                inspectDate: inspectDate.value,
+                inspectTime: inspectTime.value
             };
 
             fetch(api, {
@@ -1217,27 +1568,24 @@
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify(payload)
             })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === "success") {
-                        inspectModal.classList.remove('active');
-                        inspectForm.reset();
-
-                        // Switch to Completed tab where task is ready for final signoff
-                        switchTab('completed');
-                        loadAllData();
-                    } else {
-                        alert("Failed to submit inspection: " + (data.message || "Server error"));
-                    }
-                })
-                .catch(err => alert("Error submitting inspection: " + err.message))
-                .finally(() => {
-                    completeInspectSubmitBtn.disabled = false;
-                    completeInspectSubmitBtn.classList.remove('loading');
-                });
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    inspectModal.classList.remove('active');
+                    inspectForm.reset();
+                    switchTab('completed');
+                    loadAllData();
+                } else {
+                    alert("Failed to submit inspection: " + (data.message || "Server error"));
+                }
+            })
+            .catch(err => alert("Error: " + err.message))
+            .finally(() => {
+                completeInspectSubmitBtn.disabled = false;
+                completeInspectSubmitBtn.classList.remove('loading');
+            });
         });
 
-        // 9. Return to Field from Completed Tab
         function handleReturnToField(fileNumber) {
             if (!confirm(`Return task #${fileNumber} back to On Field?`)) return;
 
@@ -1246,49 +1594,18 @@
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify({ action: "updateStatus", fileNumber: fileNumber, status: "On Field" })
             })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === "success") {
-                        switchTab('on-field');
-                        loadAllData();
-                    } else {
-                        alert("Could not return task: " + data.message);
-                    }
-                })
-                .catch(err => alert("Error: " + err.message));
-        }
-
-        // 10. Final Complete: Capture current date & time, mark status as "Completed"
-        function handleFinalComplete(fileNumber) {
-            if (!confirm(`Mark task #${fileNumber} as officially Completed?`)) return;
-
-            const now = new Date();
-            const completedDate = now.toISOString().split('T')[0];
-            const completedTime = now.toTimeString().slice(0, 5);
-
-            fetch(api, {
-                method: "POST",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify({
-                    action: "updateStatus",
-                    fileNumber: fileNumber,
-                    status: "Completed",
-                    completedDate: completedDate,
-                    completedTime: completedTime
-                })
+            .then(res => res.json())
+            .then(data => {
+                if (data.status === "success") {
+                    switchTab('on-field');
+                    loadAllData();
+                } else {
+                    alert("Could not return task: " + data.message);
+                }
             })
-                .then(res => res.json())
-                .then(data => {
-                    if (data.status === "success") {
-                        loadAllData();
-                    } else {
-                        alert("Could not complete task: " + data.message);
-                    }
-                })
-                .catch(err => alert("Error: " + err.message));
+            .catch(err => alert("Error: " + err.message));
         }
 
-        // Edit local draft
         function handleEdit(fileNumber) {
             const drafts = getLocalDrafts();
             const task = drafts.find(t => t.fileNumber === fileNumber);
