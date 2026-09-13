@@ -63,7 +63,8 @@
             flex: 1;
             padding: 16px;
             overflow-y: auto;
-            padding-bottom: 90px;
+            padding-bottom: 125px;
+            /* Ensures clearance over floating bottom nav */
         }
 
         .tab-bar {
@@ -997,7 +998,33 @@
                 <div class="form-group">
                     <div class="form-row">
                         <input type="text" id="fileNumber" placeholder="File Number" required>
-                        <input type="text" id="ward" placeholder="Ward" required>
+                        <select id="ward" required>
+                            <option value="" disabled selected>Select Ward</option>
+                            <option value="1">Ward 1</option>
+                            <option value="2">Ward 2</option>
+                            <option value="3">Ward 3</option>
+                            <option value="4">Ward 4</option>
+                            <option value="5">Ward 5</option>
+                            <option value="6">Ward 6</option>
+                            <option value="7">Ward 7</option>
+                            <option value="8">Ward 8</option>
+                            <option value="9">Ward 9</option>
+                            <option value="10">Ward 10</option>
+                            <option value="11">Ward 11</option>
+                            <option value="12">Ward 12</option>
+                            <option value="13">Ward 13</option>
+                            <option value="14">Ward 14</option>
+                            <option value="15">Ward 15</option>
+                            <option value="16">Ward 16</option>
+                            <option value="17">Ward 17</option>
+                            <option value="18">Ward 18</option>
+                            <option value="19">Ward 19</option>
+                            <option value="20">Ward 20</option>
+                            <option value="21">Ward 21</option>
+                            <option value="22">Ward 22</option>
+                            <option value="23">Ward 23</option>
+                            <option value="24">Ward 24</option>
+                        </select>
                     </div>
 
                     <input type="text" id="applicantName" placeholder="Applicant Name" required>
@@ -1005,8 +1032,21 @@
 
                     <div class="form-row">
                         <input type="tel" id="mobile" placeholder="Mobile" required>
-                        <input type="text" id="work" placeholder="Type Of Work" required>
+                        <select id="work" required onchange="handleWorkChange(this.value)">
+                            <option value="" disabled selected>Select Type of Work</option>
+                            <option value="Pension Enquiry">Pension Enquiry</option>
+                            <option value="BPL Enquiry">BPL Enquiry</option>
+                            <option value="VB-G RAM G Individual Asset Visit">VB-G RAM G Individual Asset Visit</option>
+                            <option value="VB-G RAM G Field Visit">VB-G RAM G Field Visit</option>
+                            <option value="PMAY Geotagging">PMAY Geotagging</option>
+                            <option value="PMAY Field Visit">PMAY Field Visit</option>
+                            <option value="LIFE Field Visit">LIFE Field Visit</option>
+                            <option value="Others">Others</option>
+                        </select>
                     </div>
+
+                    <input type="text" id="customWork" placeholder="Enter custom type of work..."
+                        style="display: none;">
 
                     <input type="text" id="place" placeholder="Place" required>
                     <textarea id="route" rows="3" placeholder="Enter route details..."></textarea>
@@ -1274,7 +1314,33 @@
         const getLocalDrafts = () => JSON.parse(localStorage.getItem('in_office_tasks') || '[]');
         const saveLocalDrafts = (tasks) => localStorage.setItem('in_office_tasks', JSON.stringify(tasks));
 
-        openModalBtn.addEventListener('click', () => dataModal.classList.add('active'));
+        // Utility: Open any modal and immediately scroll to top
+        function openModal(modalElement) {
+            modalElement.classList.add('active');
+            const content = modalElement.querySelector('.modal-content');
+            if (content) content.scrollTop = 0;
+        }
+
+        // Toggle manual work entry input
+        function handleWorkChange(value) {
+            const customWorkInput = document.getElementById('customWork');
+            if (value === 'Others') {
+                customWorkInput.style.display = 'block';
+                customWorkInput.required = true;
+                customWorkInput.focus();
+            } else {
+                customWorkInput.style.display = 'none';
+                customWorkInput.required = false;
+                customWorkInput.value = '';
+            }
+        }
+
+        openModalBtn.addEventListener('click', () => {
+            form.reset();
+            document.getElementById('customWork').style.display = 'none';
+            openModal(dataModal);
+        });
+
         closeModalBtn.addEventListener('click', () => dataModal.classList.remove('active'));
         closeStartModalBtn.addEventListener('click', () => startModal.classList.remove('active'));
         closeInspectModalBtn.addEventListener('click', () => inspectModal.classList.remove('active'));
@@ -1547,7 +1613,6 @@
                 img.style.display = "block";
                 plc.style.display = "none";
 
-                // Tap thumbnail to preview full screen with pinch/pan
                 img.onclick = (e) => {
                     e.stopPropagation();
                     openImageViewer(img.src);
@@ -1697,7 +1762,6 @@
                 inspectSection.style.display = "none";
             }
 
-            // Realtime GPS map centering
             const mapIframe = document.getElementById('detailMapIframe');
             if (task.gps && task.gps.includes(',')) {
                 const [lat, lon] = task.gps.split(',').map(s => parseFloat(s.trim()));
@@ -1707,7 +1771,6 @@
                 mapIframe.src = `https://www.openstreetmap.org/export/embed.html?bbox=75.7,11.2,75.9,11.3&layer=mapnik`;
             }
 
-            // Render uploaded photo URLs in the 4 slots with click-to-view lightbox
             const photos = [task.photo1, task.photo2, task.photo3, task.photo4];
             for (let i = 1; i <= 4; i++) {
                 const box = document.getElementById(`detailThumbBox${i}`);
@@ -1877,7 +1940,7 @@
             inspectDate.value = now.toISOString().split('T')[0];
             inspectTime.value = now.toTimeString().slice(0, 5);
 
-            inspectModal.classList.add('active');
+            openModal(inspectModal);
         }
 
         openCompleteModalFromDetailBtn.addEventListener('click', () => {
@@ -1892,7 +1955,7 @@
             const isDone = (currentlyViewedTask.status || '').toLowerCase() === 'completed';
             completeModalTitle.textContent = isDone ? "Edit Completion Date" : "Complete Task";
 
-            completeModal.classList.add('active');
+            openModal(completeModal);
         });
 
         completeTaskForm.addEventListener('submit', (e) => {
@@ -1936,16 +1999,23 @@
 
         form.addEventListener('submit', (e) => {
             e.preventDefault();
+
+            const workSelect = document.getElementById("work").value;
+            const customWork = document.getElementById("customWork").value.trim();
+            const finalWork = (workSelect === 'Others' && customWork) ? customWork : workSelect;
+
             const newTask = {
                 fileNumber: document.getElementById("fileNumber").value.trim(),
                 ward: document.getElementById("ward").value.trim(),
                 name: document.getElementById("applicantName").value.trim(),
                 address: document.getElementById("houseName").value.trim(),
                 mobile: document.getElementById("mobile").value.trim(),
-                work: document.getElementById("work").value.trim(),
+                work: finalWork,
                 place: document.getElementById("place").value.trim(),
                 route: document.getElementById("route").value.trim(),
-                outDate: "", outTime: "", status: "In Office"
+                outDate: "",
+                outTime: "",
+                status: "In Office"
             };
 
             const drafts = getLocalDrafts();
@@ -1955,6 +2025,7 @@
 
             saveLocalDrafts(drafts);
             form.reset();
+            document.getElementById("customWork").style.display = "none";
             dataModal.classList.remove('active');
             switchTab('in-office');
             loadAllData();
@@ -1965,7 +2036,7 @@
             const now = new Date();
             startDueDate.value = now.toISOString().split('T')[0];
             startTime.value = now.toTimeString().slice(0, 5);
-            startModal.classList.add('active');
+            openModal(startModal);
         }
 
         startTaskForm.addEventListener('submit', (e) => {
@@ -2065,15 +2136,36 @@
             if (!task) return;
 
             document.getElementById("fileNumber").value = task.fileNumber;
-            document.getElementById("ward").value = task.ward;
+            document.getElementById("ward").value = task.ward || '';
             document.getElementById("applicantName").value = task.name;
             document.getElementById("houseName").value = task.address;
             document.getElementById("mobile").value = task.mobile;
-            document.getElementById("work").value = task.work;
+
+            const workSelect = document.getElementById("work");
+            const customWorkInput = document.getElementById("customWork");
+            const standardWorks = [
+                "Pension Enquiry", "BPL Enquiry", "VB-G RAM G Individual Asset Visit",
+                "VB-G RAM G Field Visit", "PMAY Geotagging", "PMAY Field Visit", "LIFE Field Visit"
+            ];
+
+            if (standardWorks.includes(task.work)) {
+                workSelect.value = task.work;
+                customWorkInput.style.display = "none";
+                customWorkInput.value = "";
+            } else if (task.work) {
+                workSelect.value = "Others";
+                customWorkInput.style.display = "block";
+                customWorkInput.value = task.work;
+            } else {
+                workSelect.value = "";
+                customWorkInput.style.display = "none";
+                customWorkInput.value = "";
+            }
+
             document.getElementById("place").value = task.place;
             document.getElementById("route").value = task.route;
 
-            dataModal.classList.add('active');
+            openModal(dataModal);
         }
 
         function escapeHtml(str) {
