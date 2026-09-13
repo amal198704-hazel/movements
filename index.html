@@ -10,13 +10,30 @@
     <link rel="stylesheet"
         href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
 
+    <!-- Anek Malayalam Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Malayalam:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+
     <style>
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             -webkit-tap-highlight-color: transparent;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-family: 'Anek Malayalam', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        input,
+        button,
+        textarea,
+        select {
+            font-family: 'Anek Malayalam', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+        }
+
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined' !important;
         }
 
         body {
@@ -28,7 +45,6 @@
             overflow: hidden;
         }
 
-        /* App Header */
         header {
             background: #ffffff;
             padding: 16px 20px;
@@ -43,7 +59,6 @@
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
         }
 
-        /* Main Content Area */
         main {
             flex: 1;
             padding: 16px;
@@ -51,7 +66,6 @@
             padding-bottom: 90px;
         }
 
-        /* Tab Switcher */
         .tab-bar {
             display: flex;
             background: #ffffff;
@@ -102,14 +116,12 @@
             color: #ffffff;
         }
 
-        /* Card Container */
         #cardsContainer {
             display: flex;
             flex-direction: column;
             gap: 14px;
         }
 
-        /* Task Card */
         .task-card {
             background: #ffffff;
             border-radius: 16px;
@@ -268,7 +280,6 @@
             font-size: 16px;
         }
 
-        /* Bottom Nav */
         .bottom-nav {
             position: fixed;
             bottom: 0;
@@ -336,7 +347,7 @@
             font-size: 32px;
         }
 
-        /* Full Screen Detail Page View */
+        /* Full Screen Detail View */
         .detail-page {
             position: fixed;
             top: 0;
@@ -408,7 +419,7 @@
             border: 0;
         }
 
-        /* 4-Image Grid */
+        /* 4 Slots Thumbnail Grid */
         .thumb-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -575,11 +586,25 @@
         }
 
         @keyframes rainbowGlow {
-            0% { box-shadow: 0 0 0 2px #ff416c, 0 0 12px rgba(255, 65, 108, 0.6); }
-            25% { box-shadow: 0 0 0 2px #ff8a00, 0 0 12px rgba(255, 138, 0, 0.6); }
-            50% { box-shadow: 0 0 0 2px #00b09b, 0 0 12px rgba(0, 176, 155, 0.6); }
-            75% { box-shadow: 0 0 0 2px #9b51e0, 0 0 12px rgba(155, 81, 224, 0.6); }
-            100% { box-shadow: 0 0 0 2px #ff416c, 0 0 12px rgba(255, 65, 108, 0.6); }
+            0% {
+                box-shadow: 0 0 0 2px #ff416c, 0 0 12px rgba(255, 65, 108, 0.6);
+            }
+
+            25% {
+                box-shadow: 0 0 0 2px #ff8a00, 0 0 12px rgba(255, 138, 0, 0.6);
+            }
+
+            50% {
+                box-shadow: 0 0 0 2px #00b09b, 0 0 12px rgba(0, 176, 155, 0.6);
+            }
+
+            75% {
+                box-shadow: 0 0 0 2px #9b51e0, 0 0 12px rgba(155, 81, 224, 0.6);
+            }
+
+            100% {
+                box-shadow: 0 0 0 2px #ff416c, 0 0 12px rgba(255, 65, 108, 0.6);
+            }
         }
 
         .form-group input:focus,
@@ -590,9 +615,17 @@
         }
 
         @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
+            0% {
+                background-position: 0% 50%;
+            }
+
+            50% {
+                background-position: 100% 50%;
+            }
+
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .submit-btn {
@@ -681,22 +714,22 @@
 
         .gps-btn {
             width: 100%;
-            padding: 10px;
+            padding: 11px;
             border-radius: 50px;
             background: #e0f2fe;
             color: #0369a1;
             border: 1px solid #bae6fd;
             font-weight: 600;
-            font-size: 0.85rem;
+            font-size: 0.88rem;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 6px;
             cursor: pointer;
-            margin-bottom: 8px;
+            margin-bottom: 12px;
+            transition: all 0.2s ease;
         }
 
-        /* Spinner */
         .spinner {
             display: none;
             width: 18px;
@@ -712,7 +745,9 @@
         }
 
         @keyframes spin {
-            to { transform: rotate(360deg); }
+            to {
+                transform: rotate(360deg);
+            }
         }
 
         #cardsLoader {
@@ -720,6 +755,82 @@
             color: #64748b;
             padding: 30px 10px;
             font-size: 0.95rem;
+        }
+
+        /* Fullscreen Mobile Lightbox Viewer with Pinch & Pan */
+        .image-viewer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.96);
+            z-index: 500;
+            display: flex;
+            flex-direction: column;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity 0.25s ease, visibility 0.25s ease;
+            touch-action: none;
+        }
+
+        .image-viewer-overlay.active {
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .viewer-header {
+            height: 55px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 16px;
+            background: rgba(20, 20, 20, 0.6);
+            backdrop-filter: blur(10px);
+            z-index: 10;
+        }
+
+        .viewer-title {
+            color: #ffffff;
+            font-size: 0.95rem;
+            font-weight: 600;
+        }
+
+        .viewer-close-btn {
+            background: none;
+            border: none;
+            color: #ffffff;
+            font-size: 2rem;
+            line-height: 1;
+            cursor: pointer;
+            padding: 4px 8px;
+        }
+
+        .viewer-container {
+            flex: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+            user-select: none;
+        }
+
+        .viewer-container img {
+            max-width: 100%;
+            max-height: 100%;
+            object-fit: contain;
+            transform-origin: center center;
+            will-change: transform;
+            transition: transform 0.08s ease-out;
+        }
+
+        .viewer-hint {
+            text-align: center;
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.6);
+            padding: 10px;
+            pointer-events: none;
         }
     </style>
 </head>
@@ -729,7 +840,6 @@
     <header>My Mobile App</header>
 
     <main>
-        <!-- Tab Bar -->
         <div class="tab-bar">
             <button class="tab-btn active" data-tab="in-office" onclick="switchTab('in-office')">
                 <span class="material-symbols-outlined">desk</span>
@@ -782,14 +892,16 @@
         </div>
 
         <div class="detail-body">
-            <!-- Applicant & Info Card -->
             <div class="detail-card">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
+                <div
+                    style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px;">
                     <span class="file-badge" id="detailFileNumber">#000</span>
                     <span class="ward-tag" id="detailWard">Ward: -</span>
                 </div>
-                <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 4px;" id="detailApplicantName">Applicant Name</h2>
-                <div style="font-size: 0.9rem; color: #555; margin-bottom: 8px;" id="detailAddress">House Name, Place</div>
+                <h2 style="font-size: 1.25rem; font-weight: 700; margin-bottom: 4px;" id="detailApplicantName">Applicant
+                    Name</h2>
+                <div style="font-size: 0.9rem; color: #555; margin-bottom: 8px;" id="detailAddress">House Name, Place
+                </div>
                 <div style="font-size: 0.88rem; color: #666; margin-bottom: 8px;">
                     <strong>Work:</strong> <span id="detailWork">-</span>
                 </div>
@@ -802,9 +914,9 @@
                 </div>
             </div>
 
-            <!-- Inspection Findings -->
             <div class="detail-card" id="detailInspectionSection">
-                <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: #166534; display: flex; align-items: center; gap: 6px;">
+                <h4
+                    style="font-size: 0.95rem; font-weight: 700; margin-bottom: 8px; color: #166534; display: flex; align-items: center; gap: 6px;">
                     <span class="material-symbols-outlined" style="font-size: 18px;">verified</span>
                     Field Inspection Data
                 </h4>
@@ -814,68 +926,58 @@
                 <div style="font-size: 0.88rem; margin-bottom: 6px;">
                     <strong>Remarks:</strong> <span id="detailRemarks">-</span>
                 </div>
-                <div style="font-size: 0.8rem; color: #777;">
+                <div style="font-size: 0.8rem; color: #777; margin-bottom: 4px;">
                     <strong>Inspected on:</strong> <span id="detailInspectDateTime">-</span>
+                </div>
+                <div style="font-size: 0.8rem; color: #0284c7;" id="detailGpsContainer">
+                    <strong>GPS:</strong> <span id="detailGpsText">Not captured</span>
+                </div>
+                <div id="detailPdfContainer" style="margin-top: 6px; display: none;">
+                    <a href="#" id="detailPdfLink" target="_blank"
+                        style="font-size: 0.85rem; font-weight: 600; color: #ff416c; display: inline-flex; align-items: center; gap: 4px;">
+                        <span class="material-symbols-outlined" style="font-size: 18px;">picture_as_pdf</span>
+                        View Inspection PDF Report
+                    </a>
                 </div>
             </div>
 
-            <!-- Live Map Card -->
             <div class="detail-card">
-                <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; color: #0284c7;">
+                <h4
+                    style="font-size: 0.95rem; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 6px; color: #0284c7;">
                     <span class="material-symbols-outlined" style="font-size: 18px;">map</span>
                     Location Map
                 </h4>
                 <div class="detail-map-frame">
-                    <iframe id="detailMapIframe" src="https://www.openstreetmap.org/export/embed.html?bbox=75.7,11.2,75.9,11.3&layer=mapnik"></iframe>
+                    <iframe id="detailMapIframe" src="about:blank"></iframe>
                 </div>
             </div>
 
-            <!-- 4-Image Grid Card -->
             <div class="detail-card">
-                <h4 style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; color: #9b51e0;">
+                <h4
+                    style="font-size: 0.95rem; font-weight: 700; margin-bottom: 4px; display: flex; align-items: center; gap: 6px; color: #9b51e0;">
                     <span class="material-symbols-outlined" style="font-size: 18px;">photo_library</span>
                     Inspection Photos (4 Slots)
                 </h4>
                 <div class="thumb-grid">
-                    <div class="thumb-box" onclick="triggerThumbUpload(1)">
-                        <img id="thumbImg1" src="" style="display: none;">
-                        <div class="thumb-placeholder" id="thumbPlc1">
-                            <span class="material-symbols-outlined">add_a_photo</span>
-                            <span>Photo 1</span>
-                        </div>
-                        <input type="file" accept="image/*" class="thumb-file-input" id="thumbInput1" onchange="previewThumb(1, event)">
+                    <div class="thumb-box" id="detailThumbBox1">
+                        <img id="detailThumbImg1" src="" style="display: none;">
+                        <div class="thumb-placeholder" id="detailThumbPlc1"><span>No Photo</span></div>
                     </div>
-
-                    <div class="thumb-box" onclick="triggerThumbUpload(2)">
-                        <img id="thumbImg2" src="" style="display: none;">
-                        <div class="thumb-placeholder" id="thumbPlc2">
-                            <span class="material-symbols-outlined">add_a_photo</span>
-                            <span>Photo 2</span>
-                        </div>
-                        <input type="file" accept="image/*" class="thumb-file-input" id="thumbInput2" onchange="previewThumb(2, event)">
+                    <div class="thumb-box" id="detailThumbBox2">
+                        <img id="detailThumbImg2" src="" style="display: none;">
+                        <div class="thumb-placeholder" id="detailThumbPlc2"><span>No Photo</span></div>
                     </div>
-
-                    <div class="thumb-box" onclick="triggerThumbUpload(3)">
-                        <img id="thumbImg3" src="" style="display: none;">
-                        <div class="thumb-placeholder" id="thumbPlc3">
-                            <span class="material-symbols-outlined">add_a_photo</span>
-                            <span>Photo 3</span>
-                        </div>
-                        <input type="file" accept="image/*" class="thumb-file-input" id="thumbInput3" onchange="previewThumb(3, event)">
+                    <div class="thumb-box" id="detailThumbBox3">
+                        <img id="detailThumbImg3" src="" style="display: none;">
+                        <div class="thumb-placeholder" id="detailThumbPlc3"><span>No Photo</span></div>
                     </div>
-
-                    <div class="thumb-box" onclick="triggerThumbUpload(4)">
-                        <img id="thumbImg4" src="" style="display: none;">
-                        <div class="thumb-placeholder" id="thumbPlc4">
-                            <span class="material-symbols-outlined">add_a_photo</span>
-                            <span>Photo 4</span>
-                        </div>
-                        <input type="file" accept="image/*" class="thumb-file-input" id="thumbInput4" onchange="previewThumb(4, event)">
+                    <div class="thumb-box" id="detailThumbBox4">
+                        <img id="detailThumbImg4" src="" style="display: none;">
+                        <div class="thumb-placeholder" id="detailThumbPlc4"><span>No Photo</span></div>
                     </div>
                 </div>
             </div>
 
-            <!-- Set Completion Date/Time Button -->
             <button class="submit-btn" id="openCompleteModalFromDetailBtn" style="margin-top: 10px;">
                 <span class="material-symbols-outlined">event_available</span>
                 <span class="btn-text">Set Completion Date & Time</span>
@@ -929,7 +1031,8 @@
                 <input type="hidden" id="activeStartFileNumber">
 
                 <div class="form-group">
-                    <label style="font-size: 0.85rem; color: #666; margin-bottom: 6px; display: block;">Select Out Date & Time</label>
+                    <label style="font-size: 0.85rem; color: #666; margin-bottom: 6px; display: block;">Select Out Date
+                        & Time</label>
                     <div class="form-row">
                         <input type="date" id="startDueDate" required>
                         <input type="time" id="startTime" required>
@@ -944,7 +1047,7 @@
         </div>
     </div>
 
-    <!-- MODAL 3: INSPECTION -->
+    <!-- MODAL 3: INSPECTION WITH CAMERA & REAL GPS -->
     <div class="modal-overlay" id="inspectModal">
         <div class="modal-content">
             <div class="modal-header">
@@ -954,48 +1057,98 @@
 
             <form id="inspectForm">
                 <input type="hidden" id="inspectFileNumber">
+                <input type="hidden" id="capturedGpsCoords" value="">
 
-                <div style="margin-bottom: 14px; background: #faf7fc; padding: 10px 14px; border-radius: 12px; border-left: 4px solid #9b51e0;">
+                <div
+                    style="margin-bottom: 14px; background: #faf7fc; padding: 10px 14px; border-radius: 12px; border-left: 4px solid #9b51e0;">
                     <div style="font-weight: 700; color: #333;" id="inspectApplicantInfo">Applicant Name</div>
                     <div style="font-size: 0.8rem; color: #777;" id="inspectFileInfo">File: #000</div>
                 </div>
 
                 <div class="form-group">
-                    <label style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Eligibility Status</label>
+                    <label
+                        style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Eligibility
+                        Status</label>
                     <select id="inspectEligibility" required>
                         <option value="Eligible">Eligible</option>
                         <option value="Ineligible">Ineligible</option>
                         <option value="Pending / Inquiry">Pending / Inquiry</option>
                     </select>
 
-                    <label style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Field Remarks</label>
-                    <textarea id="inspectRemarks" rows="3" placeholder="Enter remarks, verifications, site condition..." required></textarea>
+                    <label
+                        style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Field
+                        Remarks</label>
+                    <textarea id="inspectRemarks" rows="3" placeholder="Enter remarks, verifications, site condition..."
+                        required></textarea>
 
-                    <label style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Inspection Date & Time</label>
+                    <label
+                        style="font-size: 0.85rem; font-weight: 600; color: #555; margin-bottom: 4px; display: block;">Inspection
+                        Date & Time</label>
                     <div class="form-row">
                         <input type="date" id="inspectDate" required>
                         <input type="time" id="inspectTime" required>
                     </div>
 
+                    <!-- Realtime GPS Capture -->
                     <button type="button" class="gps-btn" id="gpsBtn">
                         <span class="material-symbols-outlined">my_location</span>
-                        <span id="gpsStatusText">Capture Current GPS</span>
+                        <span id="gpsStatusText">Capture Live GPS Location (Optional)</span>
                     </button>
 
+                    <!-- 4 Slots Camera Capture & Client Compression -->
                     <div class="upload-section">
                         <label>
-                            <span class="material-symbols-outlined">add_a_photo</span>
-                            Upload Site Photos (Dummy)
+                            <span class="material-symbols-outlined">photo_camera</span>
+                            Take Site Photos (Max 4, Optional)
                         </label>
-                        <input type="file" accept="image/*" multiple style="margin-bottom: 0; font-size: 0.8rem; background: transparent; border: none; padding: 0;">
+                        <div class="thumb-grid">
+                            <div class="thumb-box" onclick="document.getElementById('inspectPhotoInput1').click()">
+                                <img id="inspectImgPrev1" src="" style="display: none;">
+                                <div class="thumb-placeholder" id="inspectPlc1">
+                                    <span class="material-symbols-outlined">add_a_photo</span>
+                                    <span>Slot 1</span>
+                                </div>
+                                <input type="file" accept="image/*" capture="environment" class="thumb-file-input"
+                                    id="inspectPhotoInput1" onchange="handlePhotoSelect(1, event)">
+                            </div>
+                            <div class="thumb-box" onclick="document.getElementById('inspectPhotoInput2').click()">
+                                <img id="inspectImgPrev2" src="" style="display: none;">
+                                <div class="thumb-placeholder" id="inspectPlc2">
+                                    <span class="material-symbols-outlined">add_a_photo</span>
+                                    <span>Slot 2</span>
+                                </div>
+                                <input type="file" accept="image/*" capture="environment" class="thumb-file-input"
+                                    id="inspectPhotoInput2" onchange="handlePhotoSelect(2, event)">
+                            </div>
+                            <div class="thumb-box" onclick="document.getElementById('inspectPhotoInput3').click()">
+                                <img id="inspectImgPrev3" src="" style="display: none;">
+                                <div class="thumb-placeholder" id="inspectPlc3">
+                                    <span class="material-symbols-outlined">add_a_photo</span>
+                                    <span>Slot 3</span>
+                                </div>
+                                <input type="file" accept="image/*" capture="environment" class="thumb-file-input"
+                                    id="inspectPhotoInput3" onchange="handlePhotoSelect(3, event)">
+                            </div>
+                            <div class="thumb-box" onclick="document.getElementById('inspectPhotoInput4').click()">
+                                <img id="inspectImgPrev4" src="" style="display: none;">
+                                <div class="thumb-placeholder" id="inspectPlc4">
+                                    <span class="material-symbols-outlined">add_a_photo</span>
+                                    <span>Slot 4</span>
+                                </div>
+                                <input type="file" accept="image/*" capture="environment" class="thumb-file-input"
+                                    id="inspectPhotoInput4" onchange="handlePhotoSelect(4, event)">
+                            </div>
+                        </div>
                     </div>
 
+                    <!-- PDF Upload (Optional) -->
                     <div class="upload-section">
                         <label>
                             <span class="material-symbols-outlined">picture_as_pdf</span>
-                            Attach Field Report PDF (Dummy)
+                            Attach Field Report PDF (Optional)
                         </label>
-                        <input type="file" accept="application/pdf" style="margin-bottom: 0; font-size: 0.8rem; background: transparent; border: none; padding: 0;">
+                        <input type="file" id="inspectPdfInput" accept="application/pdf"
+                            style="margin-bottom: 0; font-size: 0.8rem; background: transparent; border: none; padding: 0;">
                     </div>
                 </div>
 
@@ -1003,7 +1156,7 @@
                     <button type="button" class="btn-cancel" id="cancelInspectBtn">Cancel</button>
                     <button type="submit" class="btn-confirm-complete" id="completeInspectSubmitBtn">
                         <span class="spinner" aria-hidden="true"></span>
-                        <span class="material-symbols-outlined">send</span>
+                        <span class="material-symbols-outlined">cloud_upload</span>
                         <span class="btn-text">Submit Inspection</span>
                     </button>
                 </div>
@@ -1011,7 +1164,7 @@
         </div>
     </div>
 
-    <!-- MODAL 4: DATE & TIME PICKER MODAL -->
+    <!-- MODAL 4: DATE & TIME PICKER -->
     <div class="modal-overlay" id="completeModal">
         <div class="modal-content" style="max-width: 380px;">
             <div class="modal-header">
@@ -1023,7 +1176,8 @@
                 <input type="hidden" id="activeCompleteFileNumber">
 
                 <div class="form-group">
-                    <label style="font-size: 0.85rem; color: #666; margin-bottom: 6px; display: block;">Select Completion Date & Time</label>
+                    <label style="font-size: 0.85rem; color: #666; margin-bottom: 6px; display: block;">Select
+                        Completion Date & Time</label>
                     <div class="form-row">
                         <input type="date" id="finalDueDate" required>
                         <input type="time" id="finalTime" required>
@@ -1038,17 +1192,34 @@
         </div>
     </div>
 
+    <!-- FULLSCREEN IMAGE VIEWER LIGHTBOX (PINCH & PAN) -->
+    <div class="image-viewer-overlay" id="imageViewerOverlay">
+        <div class="viewer-header">
+            <span class="viewer-title">Photo Preview</span>
+            <button class="viewer-close-btn" id="closeImageViewerBtn">&times;</button>
+        </div>
+        <div class="viewer-container" id="viewerContainer">
+            <img id="viewerImage" src="" alt="Preview">
+        </div>
+        <div class="viewer-hint">Double tap or pinch to zoom • Drag to pan</div>
+    </div>
+
     <script>
+        // ==========================================
+        // REPLACE WITH YOUR CLOUDINARY CONFIG
+        // ==========================================
+        const CLOUD_NAME = "YOUR_CLOUD_NAME";
+        const UPLOAD_PRESET = "YOUR_UPLOAD_PRESET";
         const api = "https://script.google.com/macros/s/AKfycbySLnyYj8QHF3-dXiUEW6Oxk9OH788U3oXfDdSmGgiv_PPqupLQykz1XY7HoyVviZ-7/exec";
 
-        // Navigation & General Elements
+        // Navigation & Modals
         const openModalBtn = document.getElementById('openModalBtn');
         const closeModalBtn = document.getElementById('closeModalBtn');
         const dataModal = document.getElementById('dataModal');
         const form = document.getElementById('todoForm');
         const cardsContainer = document.getElementById('cardsContainer');
 
-        // Start Modal Elements
+        // Start Modal
         const startModal = document.getElementById('startModal');
         const closeStartModalBtn = document.getElementById('closeStartModalBtn');
         const startTaskForm = document.getElementById('startTaskForm');
@@ -1057,7 +1228,7 @@
         const startDueDate = document.getElementById('startDueDate');
         const startTime = document.getElementById('startTime');
 
-        // Inspect Modal Elements
+        // Inspect Modal
         const inspectModal = document.getElementById('inspectModal');
         const closeInspectModalBtn = document.getElementById('closeInspectModalBtn');
         const cancelInspectBtn = document.getElementById('cancelInspectBtn');
@@ -1069,14 +1240,15 @@
         const inspectTime = document.getElementById('inspectTime');
         const gpsBtn = document.getElementById('gpsBtn');
         const gpsStatusText = document.getElementById('gpsStatusText');
+        const capturedGpsCoords = document.getElementById('capturedGpsCoords');
         const completeInspectSubmitBtn = document.getElementById('completeInspectSubmitBtn');
 
-        // Detail Page Elements
+        // Detail Page
         const detailPage = document.getElementById('detailPage');
         const detailBackBtn = document.getElementById('detailBackBtn');
         const openCompleteModalFromDetailBtn = document.getElementById('openCompleteModalFromDetailBtn');
 
-        // Completion Modal Elements
+        // Completion Modal
         const completeModal = document.getElementById('completeModal');
         const closeCompleteModalBtn = document.getElementById('closeCompleteModalBtn');
         const completeTaskForm = document.getElementById('completeTaskForm');
@@ -1086,14 +1258,22 @@
         const finalTime = document.getElementById('finalTime');
         const completeModalTitle = document.getElementById('completeModalTitle');
 
+        // Lightbox Viewer
+        const imageViewerOverlay = document.getElementById('imageViewerOverlay');
+        const closeImageViewerBtn = document.getElementById('closeImageViewerBtn');
+        const viewerContainer = document.getElementById('viewerContainer');
+        const viewerImage = document.getElementById('viewerImage');
+
         let currentTab = 'in-office';
         let allTasks = [];
         let currentlyViewedTask = null;
 
+        // Temporary storage for 4 photo Blobs
+        const selectedPhotos = [null, null, null, null];
+
         const getLocalDrafts = () => JSON.parse(localStorage.getItem('in_office_tasks') || '[]');
         const saveLocalDrafts = (tasks) => localStorage.setItem('in_office_tasks', JSON.stringify(tasks));
 
-        // Event Listeners for Closing Modals
         openModalBtn.addEventListener('click', () => dataModal.classList.add('active'));
         closeModalBtn.addEventListener('click', () => dataModal.classList.remove('active'));
         closeStartModalBtn.addEventListener('click', () => startModal.classList.remove('active'));
@@ -1101,7 +1281,6 @@
         cancelInspectBtn.addEventListener('click', () => inspectModal.classList.remove('active'));
         closeCompleteModalBtn.addEventListener('click', () => completeModal.classList.remove('active'));
 
-        // Detail Page Back Button
         detailBackBtn.addEventListener('click', () => {
             detailPage.classList.remove('active');
             currentlyViewedTask = null;
@@ -1114,7 +1293,6 @@
             if (e.target === completeModal) completeModal.classList.remove('active');
         });
 
-        // Tab Switching
         function switchTab(tabName) {
             currentTab = tabName;
             document.querySelectorAll('.tab-btn').forEach(btn => {
@@ -1129,7 +1307,6 @@
             document.getElementById('badge-completed').textContent = completedCount;
         }
 
-        // 1. Initial Load
         window.addEventListener("DOMContentLoaded", loadAllData);
 
         function loadAllData() {
@@ -1152,7 +1329,6 @@
                 });
         }
 
-        // 2. Render Cards
         function renderCards() {
             cardsContainer.innerHTML = "";
 
@@ -1279,21 +1455,217 @@
             });
         }
 
-        // 3. Open Detail Page
+        // ==========================================
+        // REAL-TIME GPS (HTML5 GEOLOCATION)
+        // ==========================================
+        gpsBtn.addEventListener('click', () => {
+            if (!navigator.geolocation) {
+                alert("Geolocation is not supported by your browser.");
+                return;
+            }
+
+            gpsStatusText.textContent = "Acquiring precision GPS...";
+            gpsBtn.style.background = "#fef9c3";
+            gpsBtn.style.color = "#854d0e";
+            gpsBtn.style.borderColor = "#fde047";
+
+            navigator.geolocation.getCurrentPosition(
+                (pos) => {
+                    const lat = pos.coords.latitude.toFixed(6);
+                    const lon = pos.coords.longitude.toFixed(6);
+                    const coords = `${lat}, ${lon}`;
+                    capturedGpsCoords.value = coords;
+
+                    gpsStatusText.textContent = `GPS Captured: ${coords}`;
+                    gpsBtn.style.background = "#dcfce7";
+                    gpsBtn.style.color = "#15803d";
+                    gpsBtn.style.borderColor = "#86efac";
+                },
+                (err) => {
+                    console.error("GPS error:", err);
+                    gpsStatusText.textContent = "Failed to get GPS. Try again (Optional)";
+                    gpsBtn.style.background = "#fee2e2";
+                    gpsBtn.style.color = "#b91c1c";
+                    gpsBtn.style.borderColor = "#fca5a5";
+                },
+                { enableHighAccuracy: true, timeout: 12000, maximumAge: 0 }
+            );
+        });
+
+        // ==========================================
+        // CLIENT IMAGE COMPRESSION (CANVAS API)
+        // ==========================================
+        function compressImage(file, maxDimension = 1600, quality = 0.82) {
+            return new Promise((resolve, reject) => {
+                const img = new Image();
+                const reader = new FileReader();
+
+                reader.onload = (e) => (img.src = e.target.result);
+                reader.onerror = (err) => reject(err);
+
+                img.onload = () => {
+                    let width = img.width;
+                    let height = img.height;
+
+                    if (width > height && width > maxDimension) {
+                        height = Math.round((height * maxDimension) / width);
+                        width = maxDimension;
+                    } else if (height > maxDimension) {
+                        width = Math.round((width * maxDimension) / height);
+                        height = maxDimension;
+                    }
+
+                    const canvas = document.createElement('canvas');
+                    canvas.width = width;
+                    canvas.height = height;
+
+                    const ctx = canvas.getContext('2d');
+                    ctx.drawImage(img, 0, 0, width, height);
+
+                    canvas.toBlob(
+                        (blob) => resolve(blob),
+                        'image/jpeg',
+                        quality
+                    );
+                };
+
+                reader.readAsDataURL(file);
+            });
+        }
+
+        async function handlePhotoSelect(slot, event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            try {
+                const compressedBlob = await compressImage(file);
+                selectedPhotos[slot - 1] = compressedBlob;
+
+                const img = document.getElementById(`inspectImgPrev${slot}`);
+                const plc = document.getElementById(`inspectPlc${slot}`);
+                img.src = URL.createObjectURL(compressedBlob);
+                img.style.display = "block";
+                plc.style.display = "none";
+
+                // Tap thumbnail to preview full screen with pinch/pan
+                img.onclick = (e) => {
+                    e.stopPropagation();
+                    openImageViewer(img.src);
+                };
+            } catch (err) {
+                console.error("Compression error:", err);
+                alert("Could not process photo.");
+            }
+        }
+
+        // ==========================================
+        // CLOUDINARY DIRECT UPLOAD
+        // ==========================================
+        async function uploadFileToCloudinary(fileBlob, isPdf = false) {
+            if (!fileBlob) return "";
+            if (CLOUD_NAME === "YOUR_CLOUD_NAME") {
+                console.warn("Cloudinary not configured. Skipping upload.");
+                return "";
+            }
+
+            const formData = new FormData();
+            formData.append("file", fileBlob);
+            formData.append("upload_preset", UPLOAD_PRESET);
+
+            const resourceType = isPdf ? "raw" : "image";
+            const endpoint = `https://api.cloudinary.com/v1_1/${CLOUD_NAME}/${resourceType}/upload`;
+
+            const res = await fetch(endpoint, { method: "POST", body: formData });
+            if (!res.ok) {
+                const errData = await res.json();
+                throw new Error(errData.error?.message || "Cloudinary upload failed");
+            }
+            const data = await res.json();
+            return data.secure_url || "";
+        }
+
+        // ==========================================
+        // INSPECTION SUBMISSION
+        // ==========================================
+        inspectForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            completeInspectSubmitBtn.disabled = true;
+            completeInspectSubmitBtn.classList.add('loading');
+            const btnText = completeInspectSubmitBtn.querySelector('.btn-text');
+            btnText.textContent = "Uploading assets...";
+
+            try {
+                const photoPromises = selectedPhotos.map((blob) =>
+                    blob ? uploadFileToCloudinary(blob, false) : Promise.resolve("")
+                );
+
+                const pdfInput = document.getElementById('inspectPdfInput');
+                const pdfFile = pdfInput.files[0] || null;
+                const pdfPromise = pdfFile ? uploadFileToCloudinary(pdfFile, true) : Promise.resolve("");
+
+                const [p1, p2, p3, p4] = await Promise.all(photoPromises);
+                const pdfUrl = await pdfPromise;
+
+                btnText.textContent = "Saving to Sheet...";
+
+                const payload = {
+                    action: "submitInspection",
+                    fileNumber: inspectFileNumber.value,
+                    status: "Pending Complete",
+                    eligibility: document.getElementById('inspectEligibility').value,
+                    remarks: document.getElementById('inspectRemarks').value.trim(),
+                    inspectDate: inspectDate.value,
+                    inspectTime: inspectTime.value,
+                    gps: capturedGpsCoords.value || "",
+                    photo1: p1 || "",
+                    photo2: p2 || "",
+                    photo3: p3 || "",
+                    photo4: p4 || "",
+                    pdfUrl: pdfUrl || ""
+                };
+
+                const res = await fetch(api, {
+                    method: "POST",
+                    headers: { "Content-Type": "text/plain;charset=utf-8" },
+                    body: JSON.stringify(payload)
+                });
+
+                const data = await res.json();
+                if (data.status === "success") {
+                    inspectModal.classList.remove('active');
+                    inspectForm.reset();
+                    switchTab('completed');
+                    loadAllData();
+                } else {
+                    throw new Error(data.message || "Failed to update Google Sheet");
+                }
+            } catch (err) {
+                console.error("Submit inspection error:", err);
+                alert(`Error: ${err.message}`);
+            } finally {
+                completeInspectSubmitBtn.disabled = false;
+                completeInspectSubmitBtn.classList.remove('loading');
+                btnText.textContent = "Submit Inspection";
+            }
+        });
+
+        // ==========================================
+        // DETAIL PAGE RENDERING
+        // ==========================================
         function openDetailPage(fileNumber) {
             const task = allTasks.find(t => t.fileNumber === fileNumber);
             if (!task) return;
 
             currentlyViewedTask = task;
 
-            // Fill text fields
             document.getElementById('detailHeaderTitle').textContent = `File #${task.fileNumber}`;
             document.getElementById('detailFileNumber').textContent = `#${task.fileNumber}`;
             document.getElementById('detailWard').textContent = `Ward: ${task.ward || '-'}`;
             document.getElementById('detailApplicantName').textContent = task.name || 'Unnamed Applicant';
             document.getElementById('detailAddress').textContent = `${task.address || ''}${task.place ? ', ' + task.place : ''}`;
             document.getElementById('detailWork').textContent = task.work || '-';
-            
+
             const mobileEl = document.getElementById('detailMobile');
             if (task.mobile) {
                 mobileEl.textContent = task.mobile;
@@ -1305,67 +1677,217 @@
 
             document.getElementById('detailRoute').textContent = task.route || 'No route notes provided.';
 
-            // Inspection details
             const inspectSection = document.getElementById('detailInspectionSection');
-            if (task.eligibility || task.remarks) {
+            if (task.eligibility || task.remarks || task.gps || task.pdfUrl) {
                 inspectSection.style.display = "block";
                 document.getElementById('detailEligibility').textContent = task.eligibility || '-';
                 document.getElementById('detailRemarks').textContent = task.remarks || 'None';
                 document.getElementById('detailInspectDateTime').textContent = `${task.inspectDate || ''} ${task.inspectTime || ''}`;
+                document.getElementById('detailGpsText').textContent = task.gps || 'Not captured';
+
+                const pdfContainer = document.getElementById('detailPdfContainer');
+                const pdfLink = document.getElementById('detailPdfLink');
+                if (task.pdfUrl) {
+                    pdfLink.href = task.pdfUrl;
+                    pdfContainer.style.display = "block";
+                } else {
+                    pdfContainer.style.display = "none";
+                }
             } else {
                 inspectSection.style.display = "none";
             }
 
-            // Update Map preview based on place name (using OpenStreetMap search query)
-            const mapQuery = encodeURIComponent(`${task.place || ''} ${task.ward || ''} Kerala`);
-            document.getElementById('detailMapIframe').src = `https://www.openstreetmap.org/export/embed.html?bbox=75.8,11.1,76.2,11.3&layer=mapnik`;
-
-            // Reset image thumbnails
-            for (let i = 1; i <= 4; i++) {
-                document.getElementById(`thumbImg${i}`).style.display = "none";
-                document.getElementById(`thumbImg${i}`).src = "";
-                document.getElementById(`thumbPlc${i}`).style.display = "flex";
+            // Realtime GPS map centering
+            const mapIframe = document.getElementById('detailMapIframe');
+            if (task.gps && task.gps.includes(',')) {
+                const [lat, lon] = task.gps.split(',').map(s => parseFloat(s.trim()));
+                const bboxDelta = 0.008;
+                mapIframe.src = `https://www.openstreetmap.org/export/embed.html?bbox=${lon - bboxDelta},${lat - bboxDelta},${lon + bboxDelta},${lat + bboxDelta}&layer=mapnik&marker=${lat},${lon}`;
+            } else {
+                mapIframe.src = `https://www.openstreetmap.org/export/embed.html?bbox=75.7,11.2,75.9,11.3&layer=mapnik`;
             }
 
-            // Button label inside detail page
+            // Render uploaded photo URLs in the 4 slots with click-to-view lightbox
+            const photos = [task.photo1, task.photo2, task.photo3, task.photo4];
+            for (let i = 1; i <= 4; i++) {
+                const box = document.getElementById(`detailThumbBox${i}`);
+                const img = document.getElementById(`detailThumbImg${i}`);
+                const plc = document.getElementById(`detailThumbPlc${i}`);
+                const url = photos[i - 1];
+
+                if (url) {
+                    img.src = url;
+                    img.style.display = "block";
+                    plc.style.display = "none";
+                    box.style.cursor = "zoom-in";
+                    box.onclick = () => openImageViewer(url);
+                } else {
+                    img.src = "";
+                    img.style.display = "none";
+                    plc.style.display = "flex";
+                    box.style.cursor = "default";
+                    box.onclick = null;
+                }
+            }
+
             const isDone = (task.status || '').toLowerCase() === 'completed';
             openCompleteModalFromDetailBtn.querySelector('.btn-text').textContent = isDone ? "Edit Completion Date & Time" : "Set Completion Date & Time";
 
             detailPage.classList.add('active');
         }
 
-        // Image Thumbnails Trigger & Preview
-        function triggerThumbUpload(slot) {
-            document.getElementById(`thumbInput${slot}`).click();
+        // ==========================================
+        // FULLSCREEN LIGHTBOX WITH MOBILE PINCH & PAN
+        // ==========================================
+        let scale = 1;
+        let minScale = 1;
+        let maxScale = 5;
+        let posX = 0;
+        let posY = 0;
+        let startTouchX = 0;
+        let startTouchY = 0;
+        let initialDistance = 0;
+        let initialScale = 1;
+        let isDragging = false;
+        let lastTapTime = 0;
+
+        function updateTransform(withTransition = false) {
+            if (withTransition) {
+                viewerImage.style.transition = "transform 0.25s ease";
+            } else {
+                viewerImage.style.transition = "none";
+            }
+            viewerImage.style.transform = `translate3d(${posX}px, ${posY}px, 0) scale(${scale})`;
         }
 
-        function previewThumb(slot, event) {
-            const file = event.target.files[0];
-            if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = (e) => {
-                const img = document.getElementById(`thumbImg${slot}`);
-                const plc = document.getElementById(`thumbPlc${slot}`);
-                img.src = e.target.result;
-                img.style.display = "block";
-                plc.style.display = "none";
-            };
-            reader.readAsDataURL(file);
+        function resetTransform() {
+            scale = 1;
+            posX = 0;
+            posY = 0;
+            updateTransform(true);
         }
 
-        // 4. Open Completion Modal From Detail View
+        function openImageViewer(src) {
+            if (!src) return;
+            viewerImage.src = src;
+            resetTransform();
+            imageViewerOverlay.classList.add('active');
+        }
+
+        function closeImageViewer() {
+            imageViewerOverlay.classList.remove('active');
+            setTimeout(() => {
+                viewerImage.src = "";
+                resetTransform();
+            }, 250);
+        }
+
+        closeImageViewerBtn.addEventListener('click', closeImageViewer);
+
+        function getDistance(t1, t2) {
+            const dx = t1.clientX - t2.clientX;
+            const dy = t1.clientY - t2.clientY;
+            return Math.hypot(dx, dy);
+        }
+
+        viewerContainer.addEventListener('touchstart', (e) => {
+            if (e.touches.length === 2) {
+                initialDistance = getDistance(e.touches[0], e.touches[1]);
+                initialScale = scale;
+            } else if (e.touches.length === 1) {
+                const now = Date.now();
+                if (now - lastTapTime < 300) {
+                    if (scale > 1.2) {
+                        resetTransform();
+                    } else {
+                        scale = 2.5;
+                        posX = 0;
+                        posY = 0;
+                        updateTransform(true);
+                    }
+                    lastTapTime = 0;
+                    return;
+                }
+                lastTapTime = now;
+
+                isDragging = true;
+                startTouchX = e.touches[0].clientX - posX;
+                startTouchY = e.touches[0].clientY - posY;
+            }
+        }, { passive: false });
+
+        viewerContainer.addEventListener('touchmove', (e) => {
+            e.preventDefault();
+
+            if (e.touches.length === 2) {
+                const currentDistance = getDistance(e.touches[0], e.touches[1]);
+                if (initialDistance > 0) {
+                    const factor = currentDistance / initialDistance;
+                    scale = Math.min(Math.max(initialScale * factor, minScale), maxScale);
+                    updateTransform(false);
+                }
+            } else if (e.touches.length === 1 && isDragging && scale > 1) {
+                posX = e.touches[0].clientX - startTouchX;
+                posY = e.touches[0].clientY - startTouchY;
+                updateTransform(false);
+            }
+        }, { passive: false });
+
+        viewerContainer.addEventListener('touchend', (e) => {
+            if (e.touches.length < 2) {
+                initialDistance = 0;
+            }
+            if (e.touches.length === 0) {
+                isDragging = false;
+                if (scale < 1) {
+                    resetTransform();
+                }
+            }
+        });
+
+        // ==========================================
+        // OTHER ACTION HANDLERS
+        // ==========================================
+        function handleInspect(fileNumber) {
+            const task = allTasks.find(t => t.fileNumber === fileNumber);
+            if (!task) return;
+
+            inspectFileNumber.value = task.fileNumber;
+            inspectApplicantInfo.textContent = task.name || 'Applicant';
+            inspectFileInfo.textContent = `File: #${task.fileNumber} | ${task.work || ''} | Ward: ${task.ward || ''}`;
+
+            document.getElementById('inspectEligibility').value = 'Eligible';
+            document.getElementById('inspectRemarks').value = '';
+            capturedGpsCoords.value = '';
+            gpsStatusText.textContent = "Capture Live GPS Location (Optional)";
+            gpsBtn.style.background = "#e0f2fe";
+            gpsBtn.style.color = "#0369a1";
+            gpsBtn.style.borderColor = "#bae6fd";
+
+            for (let i = 1; i <= 4; i++) {
+                selectedPhotos[i - 1] = null;
+                document.getElementById(`inspectImgPrev${i}`).style.display = "none";
+                document.getElementById(`inspectImgPrev${i}`).src = "";
+                document.getElementById(`inspectPlc${i}`).style.display = "flex";
+                document.getElementById(`inspectPhotoInput${i}`).value = "";
+            }
+            document.getElementById('inspectPdfInput').value = "";
+
+            const now = new Date();
+            inspectDate.value = now.toISOString().split('T')[0];
+            inspectTime.value = now.toTimeString().slice(0, 5);
+
+            inspectModal.classList.add('active');
+        }
+
         openCompleteModalFromDetailBtn.addEventListener('click', () => {
             if (!currentlyViewedTask) return;
 
             activeCompleteFileNumber.value = currentlyViewedTask.fileNumber;
 
             const now = new Date();
-            const curDate = now.toISOString().split('T')[0];
-            const curTime = now.toTimeString().slice(0, 5);
-
-            finalDueDate.value = currentlyViewedTask.completedDate || curDate;
-            finalTime.value = currentlyViewedTask.completedTime || curTime;
+            finalDueDate.value = currentlyViewedTask.completedDate || now.toISOString().split('T')[0];
+            finalTime.value = currentlyViewedTask.completedTime || now.toTimeString().slice(0, 5);
 
             const isDone = (currentlyViewedTask.status || '').toLowerCase() === 'completed';
             completeModalTitle.textContent = isDone ? "Edit Completion Date" : "Complete Task";
@@ -1373,7 +1895,6 @@
             completeModal.classList.add('active');
         });
 
-        // 5. Submit Completion Modal
         completeTaskForm.addEventListener('submit', (e) => {
             e.preventDefault();
 
@@ -1395,25 +1916,24 @@
                     completedTime: selectedTime
                 })
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    completeModal.classList.remove('active');
-                    detailPage.classList.remove('active');
-                    completeTaskForm.reset();
-                    loadAllData();
-                } else {
-                    alert("Could not update task: " + (data.message || "Server error"));
-                }
-            })
-            .catch(err => alert("Error: " + err.message))
-            .finally(() => {
-                finalCompleteSubmitBtn.disabled = false;
-                finalCompleteSubmitBtn.classList.remove('loading');
-            });
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        completeModal.classList.remove('active');
+                        detailPage.classList.remove('active');
+                        completeTaskForm.reset();
+                        loadAllData();
+                    } else {
+                        alert("Could not update task: " + (data.message || "Server error"));
+                    }
+                })
+                .catch(err => alert("Error: " + err.message))
+                .finally(() => {
+                    finalCompleteSubmitBtn.disabled = false;
+                    finalCompleteSubmitBtn.classList.remove('loading');
+                });
         });
 
-        // 6. Drafts & Start handlers
         form.addEventListener('submit', (e) => {
             e.preventDefault();
             const newTask = {
@@ -1470,24 +1990,24 @@
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify(payload)
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    drafts.splice(draftIndex, 1);
-                    saveLocalDrafts(drafts);
-                    startModal.classList.remove('active');
-                    startTaskForm.reset();
-                    switchTab('on-field');
-                    loadAllData();
-                } else {
-                    throw new Error(data.message || "Failed to upload task.");
-                }
-            })
-            .catch(err => alert(`Error: ${err.message}`))
-            .finally(() => {
-                startSubmitBtn.disabled = false;
-                startSubmitBtn.classList.remove('loading');
-            });
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        drafts.splice(draftIndex, 1);
+                        saveLocalDrafts(drafts);
+                        startModal.classList.remove('active');
+                        startTaskForm.reset();
+                        switchTab('on-field');
+                        loadAllData();
+                    } else {
+                        throw new Error(data.message || "Failed to upload task.");
+                    }
+                })
+                .catch(err => alert(`Error: ${err.message}`))
+                .finally(() => {
+                    startSubmitBtn.disabled = false;
+                    startSubmitBtn.classList.remove('loading');
+                });
         });
 
         function handleSendBack(fileNumber) {
@@ -1500,91 +2020,24 @@
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify({ action: "deleteTask", fileNumber: fileNumber })
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    const drafts = getLocalDrafts();
-                    const draftTask = { ...task, status: "In Office", outDate: "", outTime: "" };
-                    const idx = drafts.findIndex(t => t.fileNumber === fileNumber);
-                    if (idx > -1) drafts[idx] = draftTask;
-                    else drafts.push(draftTask);
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        const drafts = getLocalDrafts();
+                        const draftTask = { ...task, status: "In Office", outDate: "", outTime: "" };
+                        const idx = drafts.findIndex(t => t.fileNumber === fileNumber);
+                        if (idx > -1) drafts[idx] = draftTask;
+                        else drafts.push(draftTask);
 
-                    saveLocalDrafts(drafts);
-                    switchTab('in-office');
-                    loadAllData();
-                } else {
-                    alert("Failed to send back: " + (data.message || "Server error"));
-                }
-            })
-            .catch(err => alert("Error: " + err.message));
+                        saveLocalDrafts(drafts);
+                        switchTab('in-office');
+                        loadAllData();
+                    } else {
+                        alert("Failed to send back: " + (data.message || "Server error"));
+                    }
+                })
+                .catch(err => alert("Error: " + err.message));
         }
-
-        function handleInspect(fileNumber) {
-            const task = allTasks.find(t => t.fileNumber === fileNumber);
-            if (!task) return;
-
-            inspectFileNumber.value = task.fileNumber;
-            inspectApplicantInfo.textContent = task.name || 'Applicant';
-            inspectFileInfo.textContent = `File: #${task.fileNumber} | ${task.work || ''} | Ward: ${task.ward || ''}`;
-
-            document.getElementById('inspectEligibility').value = 'Eligible';
-            document.getElementById('inspectRemarks').value = '';
-            gpsStatusText.textContent = "Capture Current GPS";
-
-            const now = new Date();
-            inspectDate.value = now.toISOString().split('T')[0];
-            inspectTime.value = now.toTimeString().slice(0, 5);
-
-            inspectModal.classList.add('active');
-        }
-
-        gpsBtn.addEventListener('click', () => {
-            gpsStatusText.textContent = "Acquiring GPS...";
-            setTimeout(() => {
-                gpsStatusText.textContent = "Lat: 10.8505° N, Lon: 76.2711° E (Captured)";
-                gpsBtn.style.background = "#dcfce7";
-                gpsBtn.style.color = "#15803d";
-                gpsBtn.style.borderColor = "#86efac";
-            }, 800);
-        });
-
-        inspectForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            completeInspectSubmitBtn.disabled = true;
-            completeInspectSubmitBtn.classList.add('loading');
-
-            const payload = {
-                action: "submitInspection",
-                fileNumber: inspectFileNumber.value,
-                status: "Pending Complete",
-                eligibility: document.getElementById('inspectEligibility').value,
-                remarks: document.getElementById('inspectRemarks').value.trim(),
-                inspectDate: inspectDate.value,
-                inspectTime: inspectTime.value
-            };
-
-            fetch(api, {
-                method: "POST",
-                headers: { "Content-Type": "text/plain;charset=utf-8" },
-                body: JSON.stringify(payload)
-            })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    inspectModal.classList.remove('active');
-                    inspectForm.reset();
-                    switchTab('completed');
-                    loadAllData();
-                } else {
-                    alert("Failed to submit inspection: " + (data.message || "Server error"));
-                }
-            })
-            .catch(err => alert("Error: " + err.message))
-            .finally(() => {
-                completeInspectSubmitBtn.disabled = false;
-                completeInspectSubmitBtn.classList.remove('loading');
-            });
-        });
 
         function handleReturnToField(fileNumber) {
             if (!confirm(`Return task #${fileNumber} back to On Field?`)) return;
@@ -1594,16 +2047,16 @@
                 headers: { "Content-Type": "text/plain;charset=utf-8" },
                 body: JSON.stringify({ action: "updateStatus", fileNumber: fileNumber, status: "On Field" })
             })
-            .then(res => res.json())
-            .then(data => {
-                if (data.status === "success") {
-                    switchTab('on-field');
-                    loadAllData();
-                } else {
-                    alert("Could not return task: " + data.message);
-                }
-            })
-            .catch(err => alert("Error: " + err.message));
+                .then(res => res.json())
+                .then(data => {
+                    if (data.status === "success") {
+                        switchTab('on-field');
+                        loadAllData();
+                    } else {
+                        alert("Could not return task: " + data.message);
+                    }
+                })
+                .catch(err => alert("Error: " + err.message));
         }
 
         function handleEdit(fileNumber) {
