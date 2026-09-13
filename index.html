@@ -1999,53 +1999,53 @@
                     finalCompleteSubmitBtn.classList.remove('loading');
                 });
         });
-// Function to generate a 6-character random alphanumeric string + current year (e.g., xe34d3-2026)
-function generateFileNumber() {
-    const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
-    let randomPart = '';
-    for (let i = 0; i < 6; i++) {
-        randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
-    }
-    const currentYear = new Date().getFullYear();
-    return `${randomPart}-${currentYear}`;
-}
+        // Function to generate a 6-character random alphanumeric string + current year (e.g., xe34d3-2026)
+        function generateFileNumber() {
+            const chars = 'abcdefghijklmnopqrstuvwxyz0123456789';
+            let randomPart = '';
+            for (let i = 0; i < 6; i++) {
+                randomPart += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            const currentYear = new Date().getFullYear();
+            return `${randomPart}-${currentYear}`;
+        }
         form.addEventListener('submit', (e) => {
-    e.preventDefault();
+            e.preventDefault();
 
-    const inputVal = document.getElementById("fileNumber").value.trim();
-    // Use manual entry if provided; otherwise auto-generate xe34d3-2026
-    const assignedFileNumber = inputVal !== "" ? inputVal : generateFileNumber();
+            const inputVal = document.getElementById("fileNumber").value.trim();
+            // Use manual entry if provided; otherwise auto-generate xe34d3-2026
+            const assignedFileNumber = inputVal !== "" ? inputVal : generateFileNumber();
 
-    const workSelect = document.getElementById("work").value;
-    const customWork = document.getElementById("customWork").value.trim();
-    const finalWork = (workSelect === 'Others' && customWork) ? customWork : workSelect;
+            const workSelect = document.getElementById("work").value;
+            const customWork = document.getElementById("customWork").value.trim();
+            const finalWork = (workSelect === 'Others' && customWork) ? customWork : workSelect;
 
-    const newTask = {
-        fileNumber: assignedFileNumber,
-        ward: document.getElementById("ward").value.trim(),
-        name: document.getElementById("applicantName").value.trim(),
-        address: document.getElementById("houseName").value.trim(),
-        mobile: document.getElementById("mobile").value.trim(),
-        work: finalWork,
-        place: document.getElementById("place").value.trim(),
-        route: document.getElementById("route").value.trim(),
-        outDate: "",
-        outTime: "",
-        status: "In Office"
-    };
+            const newTask = {
+                fileNumber: assignedFileNumber,
+                ward: document.getElementById("ward").value.trim(),
+                name: document.getElementById("applicantName").value.trim(),
+                address: document.getElementById("houseName").value.trim(),
+                mobile: document.getElementById("mobile").value.trim(),
+                work: finalWork,
+                place: document.getElementById("place").value.trim(),
+                route: document.getElementById("route").value.trim(),
+                outDate: "",
+                outTime: "",
+                status: "In Office"
+            };
 
-    const drafts = getLocalDrafts();
-    const idx = drafts.findIndex(t => t.fileNumber === newTask.fileNumber);
-    if (idx > -1) drafts[idx] = newTask;
-    else drafts.push(newTask);
+            const drafts = getLocalDrafts();
+            const idx = drafts.findIndex(t => t.fileNumber === newTask.fileNumber);
+            if (idx > -1) drafts[idx] = newTask;
+            else drafts.push(newTask);
 
-    saveLocalDrafts(drafts);
-    form.reset();
-    document.getElementById("customWork").style.display = "none";
-    dataModal.classList.remove('active');
-    switchTab('in-office');
-    loadAllData();
-});
+            saveLocalDrafts(drafts);
+            form.reset();
+            document.getElementById("customWork").style.display = "none";
+            dataModal.classList.remove('active');
+            switchTab('in-office');
+            loadAllData();
+        });
         function handleStart(fileNumber) {
             activeStartFileNumber.value = fileNumber;
             const now = new Date();
@@ -2252,14 +2252,14 @@ function generateFileNumber() {
         }
 
         // Register Service Worker for PWA installation
-if ("serviceWorker" in navigator) {
-    window.addEventListener("load", () => {
-        navigator.serviceWorker
-            .register("./sw.js")
-            .then((reg) => console.log("PWA Service Worker registered:", reg.scope))
-            .catch((err) => console.warn("PWA Service Worker registration failed:", err));
-    });
-}
+        if ("serviceWorker" in navigator) {
+            window.addEventListener("load", () => {
+                navigator.serviceWorker
+                    .register("./sw.js")
+                    .then((reg) => console.log("PWA Service Worker registered:", reg.scope))
+                    .catch((err) => console.warn("PWA Service Worker registration failed:", err));
+            });
+        }
     </script>
 </body>
 
