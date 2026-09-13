@@ -4,7 +4,14 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-    <title>Mobile Web App</title>
+    <!-- PWA Manifest & Meta -->
+    <link rel="manifest" href="manifest.json" />
+    <meta name="theme-color" content="#ffffff" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Movement Register" />
+    <link rel="apple-touch-icon" href="icon.svg" />
+    <title>Movement Register</title>
 
     <!-- Material Symbols / Icons -->
     <link rel="stylesheet"
@@ -2231,6 +2238,16 @@
                 alert("Please swipe away the app or close this browser tab.");
             }, 300);
         }
+
+        // Register Service Worker for PWA installation
+if ("serviceWorker" in navigator) {
+    window.addEventListener("load", () => {
+        navigator.serviceWorker
+            .register("./sw.js")
+            .then((reg) => console.log("PWA Service Worker registered:", reg.scope))
+            .catch((err) => console.warn("PWA Service Worker registration failed:", err));
+    });
+}
     </script>
 </body>
 
