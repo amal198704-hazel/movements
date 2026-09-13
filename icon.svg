@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="100%" height="100%">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff416c" />
+      <stop offset="50%" stop-color="#ff8a00" />
+      <stop offset="100%" stop-color="#9b51e0" />
+    </linearGradient>
+
+    <!-- Clip Clamp Gradient -->
+    <linearGradient id="accentGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#00b09b" />
+      <stop offset="100%" stop-color="#96c93d" />
+    </linearGradient>
+
+    <filter id="dropShadow" x="-10%" y="-10%" width="130%" height="130%">
+      <feDropShadow dx="0" dy="12" stdDeviation="16" flood-color="#2d143c" flood-opacity="0.35"/>
+    </filter>
+  </defs>
+
+  <!-- Squircle Base -->
+  <rect width="512" height="512" rx="128" fill="url(#bgGrad)" />
+
+  <!-- Clipboard Canvas -->
+  <g filter="url(#dropShadow)">
+    <rect x="106" y="110" width="300" height="320" rx="36" fill="#ffffff" />
+    
+    <!-- Top Clamp Holder -->
+    <rect x="186" y="80" width="140" height="55" rx="16" fill="url(#accentGrad)" />
+    <circle cx="256" cy="98" r="10" fill="#ffffff" opacity="0.9" />
+
+    <!-- Sheet Register Rows -->
+    <rect x="156" y="175" width="140" height="14" rx="7" fill="#9b51e0" />
+    <rect x="156" y="215" width="200" height="12" rx="6" fill="#ede5f2" />
+    <rect x="156" y="245" width="170" height="12" rx="6" fill="#ede5f2" />
+
+    <!-- Dynamic Movement Pin Badge -->
+    <circle cx="320" cy="330" r="48" fill="url(#bgGrad)" />
+    
+    <!-- Navigation Arrow Motif -->
+    <path d="M 320 302 L 342 346 L 320 336 L 298 346 Z" fill="#ffffff" />
+    
+    <!-- Checkmark Accent inside list -->
+    <path d="M 156 325 L 168 337 L 194 311" fill="none" stroke="#00b09b" stroke-width="12" stroke-linecap="round" stroke-linejoin="round" />
+  </g>
+</svg>
