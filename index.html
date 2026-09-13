@@ -865,7 +865,7 @@
     </main>
 
     <nav class="bottom-nav">
-        <button class="nav-item active">
+        <button class="nav-item active" onclick="switchTab('in-office')">
             <span class="material-symbols-outlined">home</span>
             <span>Home</span>
         </button>
@@ -876,9 +876,9 @@
             </button>
         </div>
 
-        <button class="nav-item">
-            <span class="material-symbols-outlined">person</span>
-            <span>Profile</span>
+        <button class="nav-item" id="quitAppBtn">
+            <span class="material-symbols-outlined" style="color: #ef4444;">power_settings_new</span>
+            <span style="color: #ef4444;">Exit</span>
         </button>
     </nav>
 
@@ -1246,7 +1246,7 @@
 
     <script>
         // ==========================================
-        // REPLACE WITH YOUR CLOUDINARY CONFIG
+        // CLOUDINARY CONFIGURATION
         // ==========================================
         const CLOUD_NAME = "dpeuqcbtm";
         const UPLOAD_PRESET = "movement_register";
@@ -1628,10 +1628,6 @@
         // ==========================================
         async function uploadFileToCloudinary(fileBlob, isPdf = false) {
             if (!fileBlob) return "";
-            if (CLOUD_NAME === "YOUR_CLOUD_NAME") {
-                console.warn("Cloudinary not configured. Skipping upload.");
-                return "";
-            }
 
             const formData = new FormData();
             formData.append("file", fileBlob);
@@ -2176,6 +2172,64 @@
                 .replace(/>/g, "&gt;")
                 .replace(/"/g, "&quot;")
                 .replace(/'/g, "&#039;");
+        }
+
+        // ==========================================
+        // HARDWARE / GESTURE BACK BUTTON INTERCEPTION
+        // ==========================================
+        function pushDummyHistory() {
+            history.pushState({ appShield: true }, "");
+        }
+        pushDummyHistory();
+
+        window.addEventListener("popstate", (e) => {
+            // Priority 1: Close fullscreen lightbox if active
+            if (imageViewerOverlay.classList.contains("active")) {
+                closeImageViewer();
+                pushDummyHistory();
+                return;
+            }
+
+            // Priority 2: Close full-page detail view if active
+            if (detailPage.classList.contains("active")) {
+                detailPage.classList.remove("active");
+                currentlyViewedTask = null;
+                pushDummyHistory();
+                return;
+            }
+
+            // Priority 3: Close any active modal
+            const activeModal = document.querySelector(".modal-overlay.active");
+            if (activeModal) {
+                activeModal.classList.remove("active");
+                pushDummyHistory();
+                return;
+            }
+
+            // Priority 4: On root dashboard, prompt before allowing app exit
+            const confirmExit = confirm("Do you want to exit the application?");
+            if (confirmExit) {
+                attemptAppExit();
+            } else {
+                pushDummyHistory();
+            }
+        });
+
+        // ==========================================
+        // QUIT / EXIT BUTTON HANDLER
+        // ==========================================
+        const quitAppBtn = document.getElementById("quitAppBtn");
+        quitAppBtn.addEventListener("click", () => {
+            if (confirm("Are you sure you want to close the app?")) {
+                attemptAppExit();
+            }
+        });
+
+        function attemptAppExit() {
+            window.close();
+            setTimeout(() => {
+                alert("Please swipe away the app or close this browser tab.");
+            }, 300);
         }
     </script>
 </body>
