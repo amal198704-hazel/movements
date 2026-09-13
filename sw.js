@@ -1,4 +1,4 @@
-const CACHE_NAME = "movement-register-v1";
+const CACHE_NAME = "movement-register-v1.01";
 const STATIC_ASSETS = [
   "./",
   "./index.html",
